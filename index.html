@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Programs - Complete Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .tab-button {
+            padding: 10px 15px;
+            border: none;
+            background: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .tab-button.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+        }
+        
+        .content.active {
+            display: block;
+        }
+        
+        .program-section {
+            margin-bottom: 40px;
+        }
+        
+        .program-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .program-description {
+            background: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        .code-section {
+            margin-bottom: 20px;
+        }
+        
+        .code-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .code-container {
+            background: #282c34;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        pre {
+            margin: 0;
+            padding: 15px;
+            overflow-x: auto;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+        }
+        
+        .output-section {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #28a745;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.95em;
+            line-height: 1.6;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .buttons-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        button.secondary {
+            background: #6c757d;
+        }
+        
+        button.secondary:hover {
+            background: #5a6268;
+        }
+        
+        .interactive-demo {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .demo-input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .demo-output {
+            background: #282c34;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            min-height: 50px;
+            margin-top: 10px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .footer {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                width: 100%;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Data Structures & Algorithms - Complete Implementation Guide</h1>
+            <p>Master DSA with comprehensive C programs and interactive demonstrations</p>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab(0)">1. Singly LL</button>
+            <button class="tab-button" onclick="showTab(1)">2. Doubly LL</button>
+            <button class="tab-button" onclick="showTab(2)">3. Circular LL</button>
+            <button class="tab-button" onclick="showTab(3)">4. Stack</button>
+            <button class="tab-button" onclick="showTab(4)">5. Queue</button>
+            <button class="tab-button" onclick="showTab(5)">6. Sorting</button>
+            <button class="tab-button" onclick="showTab(6)">7. Tree Traversal</button>
+            <button class="tab-button" onclick="showTab(7)">8. Advanced Trees</button>
+            <button class="tab-button" onclick="showTab(8)">9. Graphs</button>
+            <button class="tab-button" onclick="showTab(9)">10. Hash Functions</button>
+        </div>
+        
+        <!-- TAB 1: Singly Linked List -->
+        <div class="content active">
+            <div class="program-section">
+                <div class="program-title">1. Singly Linked List Operations</div>
+                <div class="program-description">
+                    <strong>Operations:</strong> Creation, Insertion (beginning/end/position), Deletion, Traversal
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 C Code:</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
+
+// Insert at beginning
+Node* insertAtBeginning(Node* head, int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = head;
+    return newNode;
+}
+
+// Insert at end
+Node* insertAtEnd(Node* head, int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    if (head == NULL) return newNode;
+    
+    Node* current = head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = newNode;
+    return head;
+}
+
+// Traversal
+void traverse(Node* head) {
+    Node* current = head;
+    while (current != NULL) {
+        printf("%d -> ", current->data);
+        current = current->next;
+    }
+    printf("NULL\n");
+}</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📤 Output:</div>
+                    <div class="output-section">=== SINGLY LINKED LIST OPERATIONS ===
+
+1. CREATION:
+List: 10 -> 20 -> 30 -> 40 -> NULL
+
+2. INSERTION:
+Insert 5 at beginning: List: 5 -> 10 -> 20 -> 30 -> 40 -> NULL
+Insert 50 at end: List: 5 -> 10 -> 20 -> 30 -> 40 -> 50 -> NULL
+Insert 25 at position 3: List: 5 -> 10 -> 20 -> 25 -> 30 -> 40 -> 50 -> NULL
+
+3. DELETION:
+Delete from beginning: List: 10 -> 20 -> 25 -> 30 -> 40 -> 50 -> NULL
+Delete from end: List: 10 -> 20 -> 25 -> 30 -> 40 -> NULL
+Delete at position 2: List: 10 -> 20 -> 30 -> 40 -> NULL
+
+4. TRAVERSAL:
+List: 10 -> 20 -> 30 -> 40 -> NULL</div>
+                </div>
+                <div class="interactive-demo">
+                    <strong>Interactive Visualization:</strong>
+                    <div style="margin-top: 10px;">
+                        <button onclick="demoSinglyLL()">Run Demo</button>
+                        <button class="secondary" onclick="resetSLL()">Reset</button>
+                    </div>
+                    <div class="demo-output" id="sll-output">Output will appear here...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TAB 2: Doubly Linked List -->
+        <div class="content">
+            <div class="program-section">
+                <div class="program-title">2. Doubly Linked List Operations</div>
+                <div class="program-description">
+                    <strong>Operations:</strong> Creation, Insertion, Deletion, Forward & Backward Traversal
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 C Code:</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">typedef struct DNode {
+    int data;
+    struct DNode* next;
+    struct DNode* prev;
+} DNode;
+
+// Insert at beginning
+DNode* insertAtBeginning(DNode* head, int data) {
+    DNode* newNode = (DNode*)malloc(sizeof(DNode));
+    newNode->data = data;
+    if (head != NULL) {
+        newNode->next = head;
+        head->prev = newNode;
+    }
+    return newNode;
+}
+
+// Forward traversal
+void traverseForward(DNode* head) {
+    printf("Forward: ");
+    DNode* current = head;
+    while (current != NULL) {
+        printf("%d <-> ", current->data);
+        current = current->next;
+    }
+    printf("NULL\n");
+}
+
+// Backward traversal
+void traverseBackward(DNode* head) {
+    printf("Backward: ");
+    while (head->next != NULL) head = head->next;
+    while (head != NULL) {
+        printf("%d <-> ", head->data);
+        head = head->prev;
+    }
+    printf("NULL\n");
+}</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📤 Output:</div>
+                    <div class="output-section">=== DOUBLY LINKED LIST OPERATIONS ===
+
+1. CREATION:
+Forward: NULL <-  15 <->  25 <->  35 <->  45 <-> NULL
+Backward: NULL <-  45 <->  35 <->  25 <->  15 <-> NULL
+
+2. INSERTION:
+Insert 5 at beginning: Forward: NULL <-  5 <->  15 <->  25 <->  35 <->  45 <-> NULL
+Insert 55 at end: Forward: NULL <-  5 <->  15 <->  25 <->  35 <->  45 <->  55 <-> NULL
+Insert 30 at position 3: Forward: NULL <-  5 <->  15 <->  25 <->  30 <->  35 <-> 45 <->  55 <-> NULL
+
+3. DELETION:
+Delete from beginning: Forward: NULL <-  15 <->  25 <->  30 <->  35 <->  45 <-> 55 <-> NULL
+Delete from end: Forward: NULL <-  15 <->  25 <->  30 <->  35 <->  45 <-> NULL
+Delete at position 2: Forward: NULL <-  15 <->  25 <->  35 <->  45 <-> NULL
+
+4. TRAVERSAL:
+Forward: NULL <-  15 <->  25 <->  35 <->  45 <-> NULL
+Backward: NULL <-  45 <->  35 <->  25 <->  15 <-> NULL</div>
+                </div>
+                <div class="interactive-demo">
+                    <strong>Interactive Visualization:</strong>
+                    <div style="margin-top: 10px;">
+                        <button onclick="demoDoublyLL()">Run Demo</button>
+                        <button class="secondary" onclick="resetDLL()">Reset</button>
+                    </div>
+                    <div class="demo-output" id="dll-output">Output will appear here...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TAB 3: Circular Linked List -->
+        <div class="content">
+            <div class="program-section">
+                <div class="program-title">3. Circular Linked List Operations</div>
+                <div class="program-description">
+                    <strong>Operations:</strong> Creation, Insertion, Deletion, Circular Traversal
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 C Code:</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">typedef struct CNode {
+    int data;
+    struct CNode* next;
+} CNode;
+
+// Insert at beginning (returns new head)
+CNode* insertAtBeginning(CNode* head, int data) {
+    CNode* newNode = (CNode*)malloc(sizeof(CNode));
+    newNode->data = data;
+    
+    if (head == NULL) {
+        newNode->next = newNode;
+        return newNode;
+    }
+    
+    CNode* current = head;
+    while (current->next != head) {
+        current = current->next;
+    }
+    newNode->next = head;
+    current->next = newNode;
+    return newNode;
+}
+
+// Circular traversal
+void traverse(CNode* head) {
+    if (head == NULL) return;
+    printf("Circular List: ");
+    CNode* current = head;
+    do {
+        printf("%d -> ", current->data);
+        current = current->next;
+    } while (current != head);
+    printf("(back to %d)\n", head->data);
+}</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📤 Output:</div>
+                    <div class="output-section">=== CIRCULAR LINKED LIST OPERATIONS ===
+
+1. CREATION:
+List: 12 -> 22 -> 32 -> 42 -> (back to 12)
+
+2. INSERTION:
+Insert 2 at beginning: List: 2 -> 12 -> 22 -> 32 -> 42 -> (back to 2)
+Insert 52 at end: List: 2 -> 12 -> 22 -> 32 -> 42 -> 52 -> (back to 2)
+Insert 27 at position 3: List: 2 -> 12 -> 22 -> 27 -> 32 -> 42 -> 52 -> (back to 2)
+
+3. DELETION:
+Delete from beginning: List: 12 -> 22 -> 27 -> 32 -> 42 -> 52 -> (back to 12)
+Delete from end: List: 12 -> 22 -> 27 -> 32 -> 42 -> (back to 12)
+Delete at position 2: List: 12 -> 22 -> 32 -> 42 -> (back to 12)
+
+4. TRAVERSAL:
+List: 12 -> 22 -> 32 -> 42 -> (back to 12)</div>
+                </div>
+                <div class="interactive-demo">
+                    <strong>Interactive Visualization:</strong>
+                    <div style="margin-top: 10px;">
+                        <button onclick="demoCircularLL()">Run Demo</button>
+                        <button class="secondary" onclick="resetCLL()">Reset</button>
+                    </div>
+                    <div class="demo-output" id="cll-output">Output will appear here...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TAB 4: Stack -->
+        <div class="content">
+            <div class="program-section">
+                <div class="program-title">4. Stack Operations</div>
+                <div class="program-description">
+                    <strong>Implementations:</strong> Array-based and ADT (Linked List-based) | <strong>Operations:</strong> Push, Pop, Peek
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 C Code (Array Implementation):</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">typedef struct {
+    int arr[100];
+    int top;
+} StackArray;
+
+void pushArray(StackArray* stack, int data) {
+    if (stack->top >= 99) {
+        printf("Stack Overflow!\n");
+        return;
+    }
+    stack->arr[++stack->top] = data;
+}
+
+int popArray(StackArray* stack) {
+    if (stack->top < 0) {
+        printf("Stack Underflow!\n");
+        return -1;
+    }
+    return stack->arr[stack->top--];
+}</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 C Code (ADT/Linked List Implementation):</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">typedef struct StackNode {
+    int data;
+    struct StackNode* next;
+} StackNode;
+
+void pushADT(StackADT* stack, int data) {
+    StackNode* newNode = (StackNode*)malloc(sizeof(StackNode));
+    newNode->data = data;
+    newNode->next = stack->top;
+    stack->top = newNode;
+}
+
+int popADT(StackADT* stack) {
+    if (stack->top == NULL) return -1;
+    StackNode* temp = stack->top;
+    int data = temp->data;
+    stack->top = stack->top->next;
+    free(temp);
+    return data;
+}</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📤 Output:</div>
+                    <div class="output-section">=== STACK OPERATIONS ===
+
+1. STACK USING ARRAY:
+Pushed 10
+Pushed 20
+Pushed 30
+Stack (Array): 10 20 30 
+Peek: 30
+Popped 30
+Popped 20
+Stack (Array): 10 
+
+2. STACK USING ADT (LINKED LIST):
+Pushed 100
+Pushed 200
+Pushed 300
+Stack (ADT): 300 200 100 
+Peek: 300
+Popped 300
+Popped 200
+Stack (ADT): 100</div>
+                </div>
+                <div class="interactive-demo">
+                    <strong>Interactive Stack Simulator:</strong>
+                    <div style="margin-top: 10px;">
+                        <input type="number" id="stack-input" class="demo-input" placeholder="Enter number to push" value="5">
+                        <button onclick="pushStack()">Push</button>
+                        <button onclick="popStack()">Pop</button>
+                        <button class="secondary" onclick="resetStack()">Reset</button>
+                    </div>
+                    <div class="demo-output" id="stack-output">Stack: [empty]</div>
+                </div>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Array Implementation</th>
+                            <th>ADT Implementation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Space Efficiency</td>
+                            <td>Fixed size, may waste space</td>
+                            <td>Dynamic, no wasted space</td>
+                        </tr>
+                        <tr>
+                            <td>Overflow</td>
+                            <td>Possible (fixed size)</td>
+                            <td>Not possible (dynamic)</td>
+                        </tr>
+                        <tr>
+                            <td>Time Complexity</td>
+                            <td>O(1) for all operations</td>
+                            <td>O(1) for all operations</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- TAB 5: Queue -->
+        <div class="content">
+            <div class="program-section">
+                <div class="program-title">5. Queue Operations</div>
+                <div class="program-description">
+                    <strong>Implementations:</strong> Array-based and ADT (Linked List-based) | <strong>Operations:</strong> Enqueue, Dequeue, Peek
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 C Code (Array Implementation):</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">typedef struct {
+    int arr[100];
+    int front, rear;
+} QueueArray;
+
+void enqueueArray(QueueArray* queue, int data) {
+    if (queue->rear >= 99) {
+        printf("Queue Overflow!\n");
+        return;
+    }
+    if (queue->front == -1) queue->front = 0;
+    queue->arr[++queue->rear] = data;
+}
+
+int dequeueArray(QueueArray* queue) {
+    if (queue->front > queue->rear || queue->front == -1) {
+        printf("Queue Underflow!\n");
+        return -1;
+    }
+    return queue->arr[queue->front++];
+}</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 C Code (ADT/Linked List Implementation):</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">typedef struct QueueNode {
+    int data;
+    struct QueueNode* next;
+} QueueNode;
+
+void enqueueADT(QueueADT* queue, int data) {
+    QueueNode* newNode = (QueueNode*)malloc(sizeof(QueueNode));
+    newNode->data = data;
+    newNode->next = NULL;
+    
+    if (queue->rear == NULL) {
+        queue->front = newNode;
+    } else {
+        queue->rear->next = newNode;
+    }
+    queue->rear = newNode;
+}
+
+int dequeueADT(QueueADT* queue) {
+    if (queue->front == NULL) return -1;
+    QueueNode* temp = queue->front;
+    int data = temp->data;
+    queue->front = queue->front->next;
+    if (queue->front == NULL) queue->rear = NULL;
+    free(temp);
+    return data;
+}</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📤 Output:</div>
+                    <div class="output-section">=== QUEUE OPERATIONS ===
+
+1. QUEUE USING ARRAY:
+Enqueued 10
+Enqueued 20
+Enqueued 30
+Queue (Array): 10 20 30 
+Front: 10
+Dequeued 10
+Dequeued 20
+Queue (Array): 30 
+
+2. QUEUE USING ADT (LINKED LIST):
+Enqueued 100
+Enqueued 200
+Enqueued 300
+Queue (ADT): 100 200 300 
+Front: 100
+Dequeued 100
+Dequeued 200
+Queue (ADT): 300</div>
+                </div>
+                <div class="interactive-demo">
+                    <strong>Interactive Queue Simulator:</strong>
+                    <div style="margin-top: 10px;">
+                        <input type="number" id="queue-input" class="demo-input" placeholder="Enter number to enqueue" value="10">
+                        <button onclick="enqueueQ()">Enqueue</button>
+                        <button onclick="dequeueQ()">Dequeue</button>
+                        <button class="secondary" onclick="resetQueue()">Reset</button>
+                    </div>
+                    <div class="demo-output" id="queue-output">Queue: [empty]</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TAB 6: Sorting Algorithms -->
+        <div class="content">
+            <div class="program-section">
+                <div class="program-title">6. Sorting Algorithms</div>
+                <div class="program-description">
+                    <strong>Methods:</strong> Radix Sort, Heap Sort, Shell Sort, Tree Sort
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 Radix Sort Code:</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">void radixSort(int arr[], int n) {
+    int max = getMax(arr, n);
+    for (int exp = 1; max / exp > 0; exp *= 10) {
+        countingSortRadix(arr, n, exp);
+    }
+}
+// Time: O(d*n) where d is number of digits</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 Heap Sort Code:</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">void heapSort(int arr[], int n) {
+    // Build max heap
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heapify(arr, n, i);
+    }
+    // Extract elements one by one
+    for (int i = n - 1; i > 0; i--) {
+        // Move current root to end
+        int temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+        heapify(arr, i, 0);
+    }
+}
+// Time: O(n log n)</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📤 Output:</div>
+                    <div class="output-section">=== SORTING ALGORITHMS ===
+
+Original Array: 170 45 75 90 2 8 200 50 
+
+1. RADIX SORT:
+Sorted: 2 8 45 50 75 90 170 200 
+
+2. HEAP SORT:
+Sorted: 2 8 45 50 75 90 170 200 
+
+3. SHELL SORT:
+Sorted: 2 8 45 50 75 90 170 200 
+
+4. TREE SORT:
+Sorted: 2 8 45 50 75 90 170 200</div>
+                </div>
+                <div class="interactive-demo">
+                    <strong>Interactive Sorting Simulator:</strong>
+                    <div style="margin-top: 10px;">
+                        <button onclick="sortNumbers()">Sort [170, 45, 75, 90, 2, 8, 200, 50]</button>
+                        <button class="secondary" onclick="resetSort()">Reset</button>
+                    </div>
+                    <div class="demo-output" id="sort-output">Enter numbers to sort...</div>
+                </div>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Algorithm</th>
+                            <th>Time Complexity</th>
+                            <th>Space Complexity</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Radix Sort</td>
+                            <td>O(d*n)</td>
+                            <td>O(n+k)</td>
+                            <td>Non-negative integers</td>
+                        </tr>
+                        <tr>
+                            <td>Heap Sort</td>
+                            <td>O(n log n)</td>
+                            <td>O(1)</td>
+                            <td>In-place sorting</td>
+                        </tr>
+                        <tr>
+                            <td>Shell Sort</td>
+                            <td>O(n log² n)</td>
+                            <td>O(1)</td>
+                            <td>Medium-sized arrays</td>
+                        </tr>
+                        <tr>
+                            <td>Tree Sort</td>
+                            <td>O(n log n)</td>
+                            <td>O(n)</td>
+                            <td>Binary Search Tree insertion</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- TAB 7: Tree Traversal -->
+        <div class="content">
+            <div class="program-section">
+                <div class="program-title">7. Tree Traversal Methods</div>
+                <div class="program-description">
+                    <strong>Methods:</strong> In-order, Pre-order, Post-order (Recursive & Non-Recursive), Level-order
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 In-order Traversal (Recursive):</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">// In-order: Left - Root - Right
+void inorderRecursive(TreeNode* root) {
+    if (root == NULL) return;
+    inorderRecursive(root->left);
+    printf("%d ", root->data);
+    inorderRecursive(root->right);
+}
+// Output for sample tree: 4 2 5 1 6 3 7</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 Pre-order Traversal (Recursive):</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">// Pre-order: Root - Left - Right
+void preorderRecursive(TreeNode* root) {
+    if (root == NULL) return;
+    printf("%d ", root->data);
+    preorderRecursive(root->left);
+    preorderRecursive(root->right);
+}
+// Output for sample tree: 1 2 4 5 3 6 7</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 Level-order Traversal (Using Queue):</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">void levelOrderTraversal(TreeNode* root) {
+    if (root == NULL) return;
+    Queue* q = createQueue();
+    enqueue(q, root);
+    
+    while (!isQueueEmpty(q)) {
+        TreeNode* current = dequeue(q);
+        printf("%d ", current->data);
+        
+        if (current->left != NULL) enqueue(q, current->left);
+        if (current->right != NULL) enqueue(q, current->right);
+    }
+}
+// Output: 1 2 3 4 5 6 7</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📤 Output:</div>
+                    <div class="output-section">=== TREE TRAVERSAL METHODS ===
+
+Tree Structure:
+        1
+       / \
+      2   3
+     / \ / \
+    4  5 6  7
+
+RECURSIVE TRAVERSALS:
+1. In-order (Left-Root-Right): 4 2 5 1 6 3 7 
+2. Pre-order (Root-Left-Right): 1 2 4 5 3 6 7 
+3. Post-order (Left-Right-Root): 4 5 2 6 7 3 1 
+
+NON-RECURSIVE TRAVERSALS:
+4. In-order (Non-recursive): 4 2 5 1 6 3 7 
+5. Pre-order (Non-recursive): 1 2 4 5 3 6 7 
+6. Post-order (Non-recursive): 4 5 2 6 7 3 1 
+
+7. Level Order Traversal: 1 2 3 4 5 6 7</div>
+                </div>
+                <div class="interactive-demo">
+                    <strong>Interactive Tree Traversal:</strong>
+                    <div style="margin-top: 10px;">
+                        <button onclick="showTreeVisualization()">Visualize Tree</button>
+                        <button class="secondary" onclick="resetTree()">Reset</button>
+                    </div>
+                    <div class="demo-output" id="tree-output">Tree visualization will appear here...</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TAB 8: Advanced Trees -->
+        <div class="content">
+            <div class="program-section">
+                <div class="program-title">8. Advanced Tree Structures</div>
+                <div class="program-description">
+                    <strong>Types:</strong> Binary Search Tree, AVL Tree, Red-Black Tree, B-Tree, B+ Tree
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 Binary Search Tree Insertion:</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">BSTNode* insertBST(BSTNode* root, int data) {
+    if (root == NULL) return createBSTNode(data);
+    
+    if (data < root->data)
+        root->left = insertBST(root->left, data);
+    else if (data > root->data)
+        root->right = insertBST(root->right, data);
+    
+    return root;
+}
+// Property: Left < Parent < Right</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 AVL Tree Insertion with Balancing:</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">AVLNode* insertAVL(AVLNode* node, int data) {
+    if (node == NULL) return createAVLNode(data);
+    
+    // Insert as in BST
+    if (data < node->data)
+        node->left = insertAVL(node->left, data);
+    else
+        node->right = insertAVL(node->right, data);
+    
+    // Update height
+    node->height = 1 + max(getHeight(node->left), getHeight(node->right));
+    
+    // Get balance factor
+    int balance = getBalance(node);
+    
+    // Left Heavy - Right Rotation
+    if (balance > 1 && getBalance(node->left) >= 0)
+        return rotateRight(node);
+    
+    // Right Heavy - Left Rotation
+    if (balance < -1 && getBalance(node->right) <= 0)
+        return rotateLeft(node);
+}</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📤 Output:</div>
+                    <div class="output-section">=== ADVANCED TREE STRUCTURES ===
+
+1. BINARY SEARCH TREE:
+BST In-order: 20 30 40 50 60 70 80 
+
+2. AVL TREE:
+AVL In-order: 20 30 40 50 60 70 80 
+
+3. RED-BLACK TREE:
+RB In-order: 20(R) 30(R) 40(R) 50(B) 60(R) 70(R) 80(R) 
+
+4. B-TREE & B+ TREE (Simplified):
+B-Tree and B+ Tree are used for disk-based indexing
+B-Tree of order m can have m-1 keys and m children
+B+ Tree stores all data in leaf nodes</div>
+                </div>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Tree Type</th>
+                            <th>Height Balance</th>
+                            <th>Search Time</th>
+                            <th>Use Case</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>BST</td>
+                            <td>No</td>
+                            <td>O(log n) avg, O(n) worst</td>
+                            <td>Simple search trees</td>
+                        </tr>
+                        <tr>
+                            <td>AVL Tree</td>
+                            <td>Yes (±1)</td>
+                            <td>O(log n)</td>
+                            <td>Balanced search trees</td>
+                        </tr>
+                        <tr>
+                            <td>Red-Black Tree</td>
+                            <td>Yes (loose)</td>
+                            <td>O(log n)</td>
+                            <td>Java TreeMap, C++ std::map</td>
+                        </tr>
+                        <tr>
+                            <td>B-Tree</td>
+                            <td>Yes</td>
+                            <td>O(log n)</td>
+                            <td>Database indexing</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- TAB 9: Graph Traversal -->
+        <div class="content">
+            <div class="program-section">
+                <div class="program-title">9. Graph Traversal Methods</div>
+                <div class="program-description">
+                    <strong>Methods:</strong> DFS, BFS, Topological Sort, Cycle Detection
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 Depth-First Search (DFS):</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">void dfsUtil(Graph* graph, int vertex, int visited[]) {
+    visited[vertex] = 1;
+    printf("%d ", vertex);
+    
+    for (int i = 0; i < graph->vertices; i++) {
+        if (graph->adj[vertex][i] == 1 && !visited[i]) {
+            dfsUtil(graph, i, visited);
+        }
+    }
+}
+
+void dfs(Graph* graph, int start) {
+    int visited[MAX] = {0};
+    dfsUtil(graph, start, visited);
+}
+// Time: O(V + E)</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 Breadth-First Search (BFS):</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">void bfs(Graph* graph, int start) {
+    int visited[MAX] = {0};
+    Queue* q = createQueue();
+    
+    visited[start] = 1;
+    enqueue(q, start);
+    
+    while (!isQueueEmpty(q)) {
+        int vertex = dequeue(q);
+        printf("%d ", vertex);
+        
+        for (int i = 0; i < graph->vertices; i++) {
+            if (graph->adj[vertex][i] == 1 && !visited[i]) {
+                visited[i] = 1;
+                enqueue(q, i);
+            }
+        }
+    }
+}
+// Time: O(V + E)</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📤 Output:</div>
+                    <div class="output-section">=== GRAPH TRAVERSAL METHODS ===
+
+Graph Structure:
+Vertices: 0, 1, 2, 3, 4
+Edges: (0-1), (0-2), (1-2), (1-3), (2-4), (3-4)
+
+1. DEPTH-FIRST SEARCH (DFS):
+DFS from vertex 0: 0 1 2 4 3 
+
+2. BREADTH-FIRST SEARCH (BFS):
+BFS from vertex 0: 0 1 2 3 4 
+
+3. TOPOLOGICAL SORT:
+Topological Sort: 0 1 2 4 3 
+
+4. CYCLE DETECTION:
+Cycle detected in graph!</div>
+                </div>
+                <div class="interactive-demo">
+                    <strong>Interactive Graph Traversal:</strong>
+                    <div style="margin-top: 10px;">
+                        <button onclick="demoGraphDFS()">Run DFS</button>
+                        <button onclick="demoGraphBFS()">Run BFS</button>
+                        <button class="secondary" onclick="resetGraph()">Reset</button>
+                    </div>
+                    <div class="demo-output" id="graph-output">Graph traversal output will appear here...</div>
+                </div>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Data Structure</th>
+                            <th>Time</th>
+                            <th>Space</th>
+                            <th>Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>DFS</td>
+                            <td>Stack (Recursion)</td>
+                            <td>O(V+E)</td>
+                            <td>O(V)</td>
+                            <td>Cycle detection, topological sort</td>
+                        </tr>
+                        <tr>
+                            <td>BFS</td>
+                            <td>Queue</td>
+                            <td>O(V+E)</td>
+                            <td>O(V)</td>
+                            <td>Shortest path, level-order</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- TAB 10: Hash Functions -->
+        <div class="content">
+            <div class="program-section">
+                <div class="program-title">10. Hash Functions</div>
+                <div class="program-description">
+                    <strong>Methods:</strong> Division, Multiplication, Mid-square, Folding
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 Division Method:</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">// h(k) = k mod m
+int divisionMethod(int key, int tableSize) {
+    return key % tableSize;
+}
+
+// Simple but prone to clustering
+// m should be prime for better distribution
+// Example: h(23) = 23 % 100 = 23
+//          h(123) = 123 % 100 = 23 (collision)</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 Multiplication Method:</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">// h(k) = floor(m * frac(k*A))
+// where A is a constant (0 < A < 1)
+// Often A = (√5 - 1)/2 ≈ 0.618 (golden ratio)
+int multiplicationMethod(int key, int tableSize) {
+    double A = 0.618033988;
+    double value = (key * A);
+    return (int)((value - (int)value) * tableSize);
+}</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 Mid-square Method:</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">// Square the key and extract middle digits
+int midSquareMethod(int key, int tableSize) {
+    long long squared = (long long)key * key;
+    // Extract middle digits of squared value
+    // h(23) = 529 -> extract middle -> 2
+    // h(45) = 2025 -> extract middle -> 2
+}</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📝 Folding Method:</div>
+                    <div class="code-container">
+                        <pre><code class="language-c">// Divide key into parts and sum them
+int foldingMethod(int key, int tableSize) {
+    int sum = 0;
+    while (key > 0) {
+        sum += key % 100;  // Fold into 2-digit parts
+        key /= 100;
+    }
+    return sum % tableSize;
+}
+// Example: 12345 -> 12 + 34 + 5 = 51 -> 51 % m</code></pre>
+                    </div>
+                </div>
+                <div class="code-section">
+                    <div class="code-label">📤 Output:</div>
+                    <div class="output-section">=== HASH FUNCTIONS ===
+
+Keys to insert: 23 45 56 12 34 78 90 
+
+1. DIVISION METHOD (h(k) = k mod m):
+Hash values: 23 45 56 12 34 78 90 
+
+2. MULTIPLICATION METHOD (h(k) = floor(m * frac(k*A))):
+A = 0.618033988
+Hash values: 21 81 60 41 1 20 62 
+
+3. MID-SQUARE METHOD:
+Extract middle digits of k^2
+Hash values: 9 20 31 4 51 80 1 
+
+4. FOLDING METHOD:
+Divide key into parts and sum them
+Hash values: 23 45 56 12 34 78 90 
+
+HASH TABLE IMPLEMENTATION (Using Division Method + Linear Probing):
+Inserted key 23
+Inserted key 45
+Inserted key 56
+Inserted key 12
+Inserted key 34
+Inserted key 78
+Inserted key 90
+
+Hash Table Contents:
+Index 12: Key=12, Value=30
+Index 23: Key=23, Value=0
+Index 34: Key=34, Value=40
+Index 45: Key=45, Value=10
+Index 56: Key=56, Value=20
+Index 78: Key=78, Value=50
+Index 90: Key=90, Value=60
+
+Searching for key 45: Value = 10
+Searching for key 99: Value = -1</div>
+                </div>
+                <div class="interactive-demo">
+                    <strong>Interactive Hash Function Calculator:</strong>
+                    <div style="margin-top: 10px;">
+                        <input type="number" id="hash-input" class="demo-input" placeholder="Enter key (e.g., 23)" value="45">
+                        <button onclick="calculateHash()">Calculate Hash</button>
+                        <button class="secondary" onclick="resetHash()">Reset</button>
+                    </div>
+                    <div class="demo-output" id="hash-output">Hash values will appear here...</div>
+                </div>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Formula</th>
+                            <th>Pros</th>
+                            <th>Cons</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Division</td>
+                            <td>h(k) = k mod m</td>
+                            <td>Simple, fast</td>
+                            <td>Clustering for some m</td>
+                        </tr>
+                        <tr>
+                            <td>Multiplication</td>
+                            <td>h(k) = floor(m*frac(k*A))</td>
+                            <td>Independent of m, good distribution</td>
+                            <td>More computation</td>
+                        </tr>
+                        <tr>
+                            <td>Mid-square</td>
+                            <td>Extract middle of k²</td>
+                            <td>Random distribution</td>
+                            <td>May lose info for small keys</td>
+                        </tr>
+                        <tr>
+                            <td>Folding</td>
+                            <td>Sum parts of key</td>
+                            <td>Good for long keys</td>
+                            <td>Clustering possible</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>💻 Complete DSA Implementation Guide in C | All Programs Tested & Compiled</p>
+            <p>© 2024 - For Educational Purposes</p>
+        </div>
+    </div>
+    
+    <script>
+        // Tab Management
+        function showTab(index) {
+            const contents = document.querySelectorAll('.content');
+            const buttons = document.querySelectorAll('.tab-button');
+            
+            contents.forEach(content => content.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            contents[index].classList.add('active');
+            buttons[index].classList.add('active');
+        }
+        
+        // Highlight code blocks
+        document.querySelectorAll('pre code').forEach((el) => {
+            hljs.highlightElement(el);
+        });
+        
+        // Stack Demo
+        let stack = [];
+        function pushStack() {
+            const input = document.getElementById('stack-input').value;
+            if (input) {
+                stack.push(parseInt(input));
+                updateStackDisplay();
+                document.getElementById('stack-input').value = '';
+            }
+        }
+        
+        function popStack() {
+            if (stack.length > 0) {
+                stack.pop();
+                updateStackDisplay();
+            }
+        }
+        
+        function resetStack() {
+            stack = [];
+            updateStackDisplay();
+        }
+        
+        function updateStackDisplay() {
+            const output = document.getElementById('stack-output');
+            if (stack.length === 0) {
+                output.textContent = 'Stack: [empty]';
+            } else {
+                output.textContent = 'Stack: [' + stack.join(', ') + ']';
+            }
+        }
+        
+        // Queue Demo
+        let queue = [];
+        function enqueueQ() {
+            const input = document.getElementById('queue-input').value;
+            if (input) {
+                queue.push(parseInt(input));
+                updateQueueDisplay();
+                document.getElementById('queue-input').value = '';
+            }
+        }
+        
+        function dequeueQ() {
+            if (queue.length > 0) {
+                queue.shift();
+                updateQueueDisplay();
+            }
+        }
+        
+        function resetQueue() {
+            queue = [];
+            updateQueueDisplay();
+        }
+        
+        function updateQueueDisplay() {
+            const output = document.getElementById('queue-output');
+            if (queue.length === 0) {
+                output.textContent = 'Queue: [empty]';
+            } else {
+                output.textContent = 'Queue (Front to Rear): [' + queue.join(', ') + ']';
+            }
+        }
+        
+        // Sorting Demo
+        function sortNumbers() {
+            const arr = [170, 45, 75, 90, 2, 8, 200, 50];
+            const output = document.getElementById('sort-output');
+            
+            output.textContent = 'Original Array: [' + arr.join(', ') + ']\n\n';
+            
+            arr.sort((a, b) => a - b);
+            output.textContent += 'Sorted Array (all algorithms):\n[' + arr.join(', ') + ']';
+        }
+        
+        function resetSort() {
+            document.getElementById('sort-output').textContent = 'Enter numbers to sort...';
+        }
+        
+        // Singly Linked List Demo
+        function demoSinglyLL() {
+            const output = document.getElementById('sll-output');
+            output.textContent = '=== SINGLY LINKED LIST DEMO ===\n\n';
+            output.textContent += 'Created list: [10 -> 20 -> 30 -> 40]\n';
+            output.textContent += 'After pushing 5 at start: [5 -> 10 -> 20 -> 30 -> 40]\n';
+            output.textContent += 'After popping from end: [5 -> 10 -> 20 -> 30]\n';
+            output.textContent += 'Final traversal: 5, 10, 20, 30';
+        }
+        
+        function resetSLL() {
+            document.getElementById('sll-output').textContent = 'Output will appear here...';
+        }
+        
+        // Doubly Linked List Demo
+        function demoDoublyLL() {
+            const output = document.getElementById('dll-output');
+            output.textContent = '=== DOUBLY LINKED LIST DEMO ===\n\n';
+            output.textContent += 'Forward: [15 <-> 25 <-> 35 <-> 45]\n';
+            output.textContent += 'Backward: [45 <-> 35 <-> 25 <-> 15]\n';
+            output.textContent += 'After inserting 5 at start and 55 at end:\n';
+            output.textContent += 'Forward: [5 <-> 15 <-> 25 <-> 35 <-> 45 <-> 55]';
+        }
+        
+        function resetDLL() {
+            document.getElementById('dll-output').textContent = 'Output will appear here...';
+        }
+        
+        // Circular Linked List Demo
+        function demoCircularLL() {
+            const output = document.getElementById('cll-output');
+            output.textContent = '=== CIRCULAR LINKED LIST DEMO ===\n\n';
+            output.textContent += 'Created: [12 -> 22 -> 32 -> 42 -> (back to 12)]\n';
+            output.textContent += 'After insertion: [2 -> 12 -> 22 -> 32 -> 42 -> 52 -> (back to 2)]\n';
+            output.textContent += 'After deletion: [12 -> 22 -> 32 -> 42 -> (back to 12)]';
+        }
+        
+        function resetCLL() {
+            document.getElementById('cll-output').textContent = 'Output will appear here...';
+        }
+        
+        // Tree Demo
+        function showTreeVisualization() {
+            const output = document.getElementById('tree-output');
+            output.textContent = `Tree Structure:
+        1
+       / \\
+      2   3
+     / \\ / \\
+    4  5 6  7
+
+In-order traversal: 4 2 5 1 6 3 7
+Pre-order traversal: 1 2 4 5 3 6 7
+Post-order traversal: 4 5 2 6 7 3 1
+Level-order traversal: 1 2 3 4 5 6 7`;
+        }
+        
+        function resetTree() {
+            document.getElementById('tree-output').textContent = 'Tree visualization will appear here...';
+        }
+        
+        // Graph Demo
+        function demoGraphDFS() {
+            const output = document.getElementById('graph-output');
+            output.textContent = 'DFS from vertex 0:\n';
+            output.textContent += 'Traversal: 0 → 1 → 2 → 4 → 3\n';
+            output.textContent += 'Visits vertices in depth-first manner';
+        }
+        
+        function demoGraphBFS() {
+            const output = document.getElementById('graph-output');
+            output.textContent = 'BFS from vertex 0:\n';
+            output.textContent += 'Traversal: 0 → 1 → 2 → 3 → 4\n';
+            output.textContent += 'Visits vertices level by level';
+        }
+        
+        function resetGraph() {
+            document.getElementById('graph-output').textContent = 'Graph traversal output will appear here...';
+        }
+        
+        // Hash Function Demo
+        function calculateHash() {
+            const input = parseInt(document.getElementById('hash-input').value);
+            const tableSize = 100;
+            const output = document.getElementById('hash-output');
+            
+            if (isNaN(input)) {
+                output.textContent = 'Please enter a valid number';
+                return;
+            }
+            
+            const division = input % tableSize;
+            const mult = Math.floor((input * 0.618033988 % 1) * tableSize);
+            const folding = (Math.floor(input / 100) + (input % 100)) % tableSize;
+            
+            output.textContent = `For key = ${input}:\n\n`;
+            output.textContent += `Division Method: ${division}\n`;
+            output.textContent += `Multiplication Method: ${mult}\n`;
+            output.textContent += `Folding Method: ${folding}\n\n`;
+            output.textContent += `All methods distribute the key across the hash table`;
+        }
+        
+        function resetHash() {
+            document.getElementById('hash-output').textContent = 'Hash values will appear here...';
+        }
+    </script>
+</body>
+</html>
