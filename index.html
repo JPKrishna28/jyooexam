@@ -288,22 +288,26 @@
                 <div class="code-section">
                     <div class="code-label">📝 C Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">typedef struct Node {
-    int data;
-    struct Node* next;
-} Node;
+                        <pre><code class="language-c">#include "singly_linked_list.h"
+
+// Create a new node
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
 
 // Insert at beginning
 Node* insertAtBeginning(Node* head, int data) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->data = data;
+    Node* newNode = createNode(data);
     newNode->next = head;
     return newNode;
 }
 
 // Insert at end
 Node* insertAtEnd(Node* head, int data) {
-    Node* newNode = (Node*)malloc(sizeof(Node));
+    Node* newNode = createNode(data);
     if (head == NULL) return newNode;
     
     Node* current = head;
@@ -314,14 +318,71 @@ Node* insertAtEnd(Node* head, int data) {
     return head;
 }
 
+// Delete from beginning
+Node* deleteFromBeginning(Node* head) {
+    if (head == NULL) return NULL;
+    Node* temp = head;
+    head = head->next;
+    free(temp);
+    return head;
+}
+
+// Delete from end
+Node* deleteFromEnd(Node* head) {
+    if (head == NULL) return NULL;
+    if (head->next == NULL) {
+        free(head);
+        return NULL;
+    }
+    Node* current = head;
+    while (current->next->next != NULL) {
+        current = current->next;
+    }
+    free(current->next);
+    current->next = NULL;
+    return head;
+}
+
+// Peek - view first element
+int peek(Node* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return -1;
+    }
+    return head->data;
+}
+
 // Traversal
 void traverse(Node* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    printf("List: ");
     Node* current = head;
     while (current != NULL) {
         printf("%d -> ", current->data);
         current = current->next;
     }
     printf("NULL\n");
+}
+
+int main() {
+    // Demo function
+    printf("=== SINGLY LINKED LIST OPERATIONS ===\n\n");
+    
+    int arr[] = {10, 20, 30, 40};
+    Node* head = NULL;
+    for (int i = 0; i < 4; i++) {
+        head = insertAtEnd(head, arr[i]);
+    }
+    
+    printf("Initial List: ");
+    traverse(head);
+    
+    printf("\nPeek: %d\n", peek(head));
+    
+    return 0;
 }</code></pre>
                     </div>
                 </div>
@@ -366,16 +427,20 @@ List: 10 -> 20 -> 30 -> 40 -> NULL</div>
                 <div class="code-section">
                     <div class="code-label">📝 C Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">typedef struct DNode {
-    int data;
-    struct DNode* next;
-    struct DNode* prev;
-} DNode;
+                        <pre><code class="language-c">#include "doubly_linked_list.h"
+
+// Create a new node
+DNode* createNode(int data) {
+    DNode* newNode = (DNode*)malloc(sizeof(DNode));
+    newNode->data = data;
+    newNode->next = NULL;
+    newNode->prev = NULL;
+    return newNode;
+}
 
 // Insert at beginning
 DNode* insertAtBeginning(DNode* head, int data) {
-    DNode* newNode = (DNode*)malloc(sizeof(DNode));
-    newNode->data = data;
+    DNode* newNode = createNode(data);
     if (head != NULL) {
         newNode->next = head;
         head->prev = newNode;
@@ -383,26 +448,104 @@ DNode* insertAtBeginning(DNode* head, int data) {
     return newNode;
 }
 
-// Forward traversal
-void traverseForward(DNode* head) {
-    printf("Forward: ");
+// Insert at end
+DNode* insertAtEnd(DNode* head, int data) {
+    DNode* newNode = createNode(data);
+    if (head == NULL) return newNode;
+    
     DNode* current = head;
-    while (current != NULL) {
-        printf("%d <-> ", current->data);
+    while (current->next != NULL) {
         current = current->next;
     }
-    printf("NULL\n");
+    current->next = newNode;
+    newNode->prev = current;
+    return head;
+}
+
+// Delete from beginning
+DNode* deleteFromBeginning(DNode* head) {
+    if (head == NULL) return NULL;
+    DNode* temp = head;
+    head = head->next;
+    if (head != NULL) head->prev = NULL;
+    free(temp);
+    return head;
+}
+
+// Delete from end
+DNode* deleteFromEnd(DNode* head) {
+    if (head == NULL) return NULL;
+    if (head->next == NULL) {
+        free(head);
+        return NULL;
+    }
+    
+    DNode* current = head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->prev->next = NULL;
+    free(current);
+    return head;
+}
+
+// Peek - view first element
+int peek(DNode* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return -1;
+    }
+    return head->data;
+}
+
+// Forward traversal
+void traverseForward(DNode* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    printf("Forward: NULL <- ");
+    DNode* current = head;
+    while (current != NULL) {
+        printf(" %d <-> ", current->data);
+        current = current->next;
+    }
+    printf(" NULL\n");
 }
 
 // Backward traversal
 void traverseBackward(DNode* head) {
-    printf("Backward: ");
-    while (head->next != NULL) head = head->next;
-    while (head != NULL) {
-        printf("%d <-> ", head->data);
-        head = head->prev;
+    if (head == NULL) return;
+    
+    DNode* current = head;
+    while (current->next != NULL) {
+        current = current->next;
     }
-    printf("NULL\n");
+    
+    printf("Backward: NULL <- ");
+    while (current != NULL) {
+        printf(" %d <-> ", current->data);
+        current = current->prev;
+    }
+    printf(" NULL\n");
+}
+
+int main() {
+    printf("=== DOUBLY LINKED LIST OPERATIONS ===\n\n");
+    
+    int arr[] = {15, 25, 35, 45};
+    DNode* head = NULL;
+    for (int i = 0; i < 4; i++) {
+        head = insertAtEnd(head, arr[i]);
+    }
+    
+    printf("Initial List:\n");
+    traverseForward(head);
+    traverseBackward(head);
+    
+    printf("\nPeek: %d\n", peek(head));
+    
+    return 0;
 }</code></pre>
                     </div>
                 </div>
@@ -449,15 +592,19 @@ Backward: NULL <-  45 <->  35 <->  25 <->  15 <-> NULL</div>
                 <div class="code-section">
                     <div class="code-label">📝 C Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">typedef struct CNode {
-    int data;
-    struct CNode* next;
-} CNode;
+                        <pre><code class="language-c">#include "circular_linked_list.h"
+
+// Create a new node
+CNode* createNode(int data) {
+    CNode* newNode = (CNode*)malloc(sizeof(CNode));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
 
 // Insert at beginning (returns new head)
 CNode* insertAtBeginning(CNode* head, int data) {
-    CNode* newNode = (CNode*)malloc(sizeof(CNode));
-    newNode->data = data;
+    CNode* newNode = createNode(data);
     
     if (head == NULL) {
         newNode->next = newNode;
@@ -473,16 +620,84 @@ CNode* insertAtBeginning(CNode* head, int data) {
     return newNode;
 }
 
+// Insert at end
+CNode* insertAtEnd(CNode* head, int data) {
+    CNode* newNode = createNode(data);
+    
+    if (head == NULL) {
+        newNode->next = newNode;
+        return newNode;
+    }
+    
+    CNode* current = head;
+    while (current->next != head) {
+        current = current->next;
+    }
+    current->next = newNode;
+    newNode->next = head;
+    return head;
+}
+
+// Delete from beginning
+CNode* deleteFromBeginning(CNode* head) {
+    if (head == NULL) return NULL;
+    if (head->next == head) {
+        free(head);
+        return NULL;
+    }
+    
+    CNode* current = head;
+    while (current->next != head) {
+        current = current->next;
+    }
+    
+    CNode* temp = head;
+    current->next = head->next;
+    head = head->next;
+    free(temp);
+    return head;
+}
+
+// Peek - view first element
+int peek(CNode* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return -1;
+    }
+    return head->data;
+}
+
 // Circular traversal
 void traverse(CNode* head) {
-    if (head == NULL) return;
-    printf("Circular List: ");
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    
+    printf("List: ");
     CNode* current = head;
     do {
         printf("%d -> ", current->data);
         current = current->next;
     } while (current != head);
     printf("(back to %d)\n", head->data);
+}
+
+int main() {
+    printf("=== CIRCULAR LINKED LIST OPERATIONS ===\n\n");
+    
+    int arr[] = {12, 22, 32, 42};
+    CNode* head = NULL;
+    for (int i = 0; i < 4; i++) {
+        head = insertAtEnd(head, arr[i]);
+    }
+    
+    printf("Initial List: ");
+    traverse(head);
+    
+    printf("\nPeek: %d\n", peek(head));
+    
+    return 0;
 }</code></pre>
                     </div>
                 </div>
@@ -527,17 +742,23 @@ List: 12 -> 22 -> 32 -> 42 -> (back to 12)</div>
                 <div class="code-section">
                     <div class="code-label">📝 C Code (Array Implementation):</div>
                     <div class="code-container">
-                        <pre><code class="language-c">typedef struct {
-    int arr[100];
-    int top;
-} StackArray;
+                        <pre><code class="language-c">#include "stack_array_adt.h"
+
+// ========== STACK USING ARRAY ==========
+
+StackArray* createStackArray() {
+    StackArray* stack = (StackArray*)malloc(sizeof(StackArray));
+    stack->top = -1;
+    return stack;
+}
 
 void pushArray(StackArray* stack, int data) {
-    if (stack->top >= 99) {
+    if (stack->top >= MAX_SIZE - 1) {
         printf("Stack Overflow!\n");
         return;
     }
     stack->arr[++stack->top] = data;
+    printf("Pushed %d\n", data);
 }
 
 int popArray(StackArray* stack) {
@@ -545,32 +766,75 @@ int popArray(StackArray* stack) {
         printf("Stack Underflow!\n");
         return -1;
     }
+    printf("Popped %d\n", stack->arr[stack->top]);
     return stack->arr[stack->top--];
-}</code></pre>
-                    </div>
-                </div>
-                <div class="code-section">
-                    <div class="code-label">📝 C Code (ADT/Linked List Implementation):</div>
-                    <div class="code-container">
-                        <pre><code class="language-c">typedef struct StackNode {
-    int data;
-    struct StackNode* next;
-} StackNode;
+}
+
+int peekArray(StackArray* stack) {
+    if (stack->top < 0) {
+        printf("Stack is empty!\n");
+        return -1;
+    }
+    return stack->arr[stack->top];
+}
+
+// ========== STACK USING ADT (LINKED LIST) ==========
+
+StackADT* createStackADT() {
+    StackADT* stack = (StackADT*)malloc(sizeof(StackADT));
+    stack->top = NULL;
+    return stack;
+}
 
 void pushADT(StackADT* stack, int data) {
     StackNode* newNode = (StackNode*)malloc(sizeof(StackNode));
     newNode->data = data;
     newNode->next = stack->top;
     stack->top = newNode;
+    printf("Pushed %d\n", data);
 }
 
 int popADT(StackADT* stack) {
-    if (stack->top == NULL) return -1;
+    if (stack->top == NULL) {
+        printf("Stack Underflow!\n");
+        return -1;
+    }
     StackNode* temp = stack->top;
     int data = temp->data;
+    printf("Popped %d\n", data);
     stack->top = stack->top->next;
     free(temp);
     return data;
+}
+
+int peekADT(StackADT* stack) {
+    if (stack->top == NULL) {
+        printf("Stack is empty!\n");
+        return -1;
+    }
+    return stack->top->data;
+}
+
+int main() {
+    printf("=== STACK OPERATIONS ===\n\n");
+    
+    printf("1. STACK USING ARRAY:\n");
+    StackArray* sa = createStackArray();
+    pushArray(sa, 10);
+    pushArray(sa, 20);
+    pushArray(sa, 30);
+    printf("Peek: %d\n", peekArray(sa));
+    popArray(sa);
+    
+    printf("\n2. STACK USING ADT:\n");
+    StackADT* sadt = createStackADT();
+    pushADT(sadt, 100);
+    pushADT(sadt, 200);
+    pushADT(sadt, 300);
+    printf("Peek: %d\n", peekADT(sadt));
+    popADT(sadt);
+    
+    return 0;
 }</code></pre>
                     </div>
                 </div>
@@ -647,18 +911,25 @@ Stack (ADT): 100</div>
                 <div class="code-section">
                     <div class="code-label">📝 C Code (Array Implementation):</div>
                     <div class="code-container">
-                        <pre><code class="language-c">typedef struct {
-    int arr[100];
-    int front, rear;
-} QueueArray;
+                        <pre><code class="language-c">#include "queue_array_adt.h"
+
+// ========== QUEUE USING ARRAY ==========
+
+QueueArray* createQueueArray() {
+    QueueArray* queue = (QueueArray*)malloc(sizeof(QueueArray));
+    queue->front = -1;
+    queue->rear = -1;
+    return queue;
+}
 
 void enqueueArray(QueueArray* queue, int data) {
-    if (queue->rear >= 99) {
+    if (queue->rear >= MAX_SIZE - 1) {
         printf("Queue Overflow!\n");
         return;
     }
     if (queue->front == -1) queue->front = 0;
     queue->arr[++queue->rear] = data;
+    printf("Enqueued %d\n", data);
 }
 
 int dequeueArray(QueueArray* queue) {
@@ -666,17 +937,26 @@ int dequeueArray(QueueArray* queue) {
         printf("Queue Underflow!\n");
         return -1;
     }
+    printf("Dequeued %d\n", queue->arr[queue->front]);
     return queue->arr[queue->front++];
-}</code></pre>
-                    </div>
-                </div>
-                <div class="code-section">
-                    <div class="code-label">📝 C Code (ADT/Linked List Implementation):</div>
-                    <div class="code-container">
-                        <pre><code class="language-c">typedef struct QueueNode {
-    int data;
-    struct QueueNode* next;
-} QueueNode;
+}
+
+int peekQueueArray(QueueArray* queue) {
+    if (queue->front == -1 || queue->front > queue->rear) {
+        printf("Queue is empty!\n");
+        return -1;
+    }
+    return queue->arr[queue->front];
+}
+
+// ========== QUEUE USING ADT (LINKED LIST) ==========
+
+QueueADT* createQueueADT() {
+    QueueADT* queue = (QueueADT*)malloc(sizeof(QueueADT));
+    queue->front = NULL;
+    queue->rear = NULL;
+    return queue;
+}
 
 void enqueueADT(QueueADT* queue, int data) {
     QueueNode* newNode = (QueueNode*)malloc(sizeof(QueueNode));
@@ -689,16 +969,51 @@ void enqueueADT(QueueADT* queue, int data) {
         queue->rear->next = newNode;
     }
     queue->rear = newNode;
+    printf("Enqueued %d\n", data);
 }
 
 int dequeueADT(QueueADT* queue) {
-    if (queue->front == NULL) return -1;
+    if (queue->front == NULL) {
+        printf("Queue Underflow!\n");
+        return -1;
+    }
     QueueNode* temp = queue->front;
     int data = temp->data;
+    printf("Dequeued %d\n", data);
     queue->front = queue->front->next;
     if (queue->front == NULL) queue->rear = NULL;
     free(temp);
     return data;
+}
+
+int peekQueueADT(QueueADT* queue) {
+    if (queue->front == NULL) {
+        printf("Queue is empty!\n");
+        return -1;
+    }
+    return queue->front->data;
+}
+
+int main() {
+    printf("=== QUEUE OPERATIONS ===\n\n");
+    
+    printf("1. QUEUE USING ARRAY:\n");
+    QueueArray* qa = createQueueArray();
+    enqueueArray(qa, 10);
+    enqueueArray(qa, 20);
+    enqueueArray(qa, 30);
+    printf("Front: %d\n", peekQueueArray(qa));
+    dequeueArray(qa);
+    
+    printf("\n2. QUEUE USING ADT:\n");
+    QueueADT* qadt = createQueueADT();
+    enqueueADT(qadt, 100);
+    enqueueADT(qadt, 200);
+    enqueueADT(qadt, 300);
+    printf("Front: %d\n", peekQueueADT(qadt));
+    dequeueADT(qadt);
+    
+    return 0;
 }</code></pre>
                     </div>
                 </div>
@@ -747,35 +1062,144 @@ Queue (ADT): 300</div>
                     <strong>Methods:</strong> Radix Sort, Heap Sort, Shell Sort, Tree Sort
                 </div>
                 <div class="code-section">
-                    <div class="code-label">📝 Radix Sort Code:</div>
+                    <div class="code-label">📝 Sorting Algorithms Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">void radixSort(int arr[], int n) {
+                        <pre><code class="language-c">#include "sorting_algorithms.h"
+
+// ========== RADIX SORT ==========
+int getMax(int arr[], int n) {
+    int max = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max) max = arr[i];
+    }
+    return max;
+}
+
+void countingSortRadix(int arr[], int n, int exp) {
+    int output[n];
+    int count[10] = {0};
+    
+    for (int i = 0; i < n; i++) {
+        count[(arr[i] / exp) % 10]++;
+    }
+    
+    for (int i = 1; i < 10; i++) {
+        count[i] += count[i - 1];
+    }
+    
+    for (int i = n - 1; i >= 0; i--) {
+        output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+        count[(arr[i] / exp) % 10]--;
+    }
+    
+    for (int i = 0; i < n; i++) {
+        arr[i] = output[i];
+    }
+}
+
+void radixSort(int arr[], int n) {
     int max = getMax(arr, n);
     for (int exp = 1; max / exp > 0; exp *= 10) {
         countingSortRadix(arr, n, exp);
     }
 }
-// Time: O(d*n) where d is number of digits</code></pre>
-                    </div>
-                </div>
-                <div class="code-section">
-                    <div class="code-label">📝 Heap Sort Code:</div>
-                    <div class="code-container">
-                        <pre><code class="language-c">void heapSort(int arr[], int n) {
-    // Build max heap
+
+// ========== HEAP SORT ==========
+void heapify(int arr[], int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+    
+    if (largest != i) {
+        int temp = arr[i];
+        arr[i] = arr[largest];
+        arr[largest] = temp;
+        heapify(arr, n, largest);
+    }
+}
+
+void heapSort(int arr[], int n) {
     for (int i = n / 2 - 1; i >= 0; i--) {
         heapify(arr, n, i);
     }
-    // Extract elements one by one
     for (int i = n - 1; i > 0; i--) {
-        // Move current root to end
         int temp = arr[0];
         arr[0] = arr[i];
         arr[i] = temp;
         heapify(arr, i, 0);
     }
 }
-// Time: O(n log n)</code></pre>
+
+// ========== QUICK SORT ==========
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+    
+    for (int j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    return i + 1;
+}
+
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+void printArray(int arr[], int n) {
+    printf("Sorted: \");
+    for (int i = 0; i < n; i++) {
+        printf("%d \", arr[i]);
+    }
+    printf("\\n\");
+}
+
+int main() {
+    printf(\"=== SORTING ALGORITHMS ===\\n\\n\");
+    
+    int arr[] = {170, 45, 75, 90, 2, 8, 200, 50};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    printf(\"Original Array: \");
+    for (int i = 0; i < n; i++) printf(\"%d \", arr[i]);
+    printf(\"\\n\\n\");
+    
+    printf(\"1. RADIX SORT:\\n\");
+    int arr1[n];
+    for (int i = 0; i < n; i++) arr1[i] = arr[i];
+    radixSort(arr1, n);
+    printArray(arr1, n);
+    
+    printf(\"\\n2. HEAP SORT:\\n\");
+    int arr2[n];
+    for (int i = 0; i < n; i++) arr2[i] = arr[i];
+    heapSort(arr2, n);
+    printArray(arr2, n);
+    
+    printf(\"\\n3. QUICK SORT:\\n\");
+    int arr3[n];
+    for (int i = 0; i < n; i++) arr3[i] = arr[i];
+    quickSort(arr3, 0, n - 1);
+    printArray(arr3, n);
+    
+    return 0;
+}</code></pre>
                     </div>
                 </div>
                 <div class="code-section">
@@ -851,48 +1275,158 @@ Sorted: 2 8 45 50 75 90 170 200</div>
                     <strong>Methods:</strong> In-order, Pre-order, Post-order (Recursive & Non-Recursive), Level-order
                 </div>
                 <div class="code-section">
-                    <div class="code-label">📝 In-order Traversal (Recursive):</div>
+                    <div class="code-label">📝 Tree Traversal Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">// In-order: Left - Root - Right
+                        <pre><code class="language-c">#include "tree_traversal.h"
+
+// Create a new tree node
+TreeNode* createNode(int data) {
+    TreeNode* node = (TreeNode*)malloc(sizeof(TreeNode));
+    node->data = data;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+// ========== RECURSIVE TRAVERSALS ==========
+
+// In-order: Left-Root-Right
 void inorderRecursive(TreeNode* root) {
     if (root == NULL) return;
     inorderRecursive(root->left);
     printf("%d ", root->data);
     inorderRecursive(root->right);
 }
-// Output for sample tree: 4 2 5 1 6 3 7</code></pre>
-                    </div>
-                </div>
-                <div class="code-section">
-                    <div class="code-label">📝 Pre-order Traversal (Recursive):</div>
-                    <div class="code-container">
-                        <pre><code class="language-c">// Pre-order: Root - Left - Right
+
+// Pre-order: Root-Left-Right
 void preorderRecursive(TreeNode* root) {
     if (root == NULL) return;
     printf("%d ", root->data);
     preorderRecursive(root->left);
     preorderRecursive(root->right);
 }
-// Output for sample tree: 1 2 4 5 3 6 7</code></pre>
-                    </div>
-                </div>
-                <div class="code-section">
-                    <div class="code-label">📝 Level-order Traversal (Using Queue):</div>
-                    <div class="code-container">
-                        <pre><code class="language-c">void levelOrderTraversal(TreeNode* root) {
+
+// Post-order: Left-Right-Root
+void postorderRecursive(TreeNode* root) {
     if (root == NULL) return;
-    Queue* q = createQueue();
-    enqueue(q, root);
+    postorderRecursive(root->left);
+    postorderRecursive(root->right);
+    printf("%d ", root->data);
+}
+
+// ========== NON-RECURSIVE TRAVERSALS USING STACK ==========
+
+void pushStack(Stack* s, TreeNode* node) {
+    if (s->top < 99) s->arr[++s->top] = node;
+}
+
+TreeNode* popStack(Stack* s) {
+    if (s->top >= 0) return s->arr[s->top--];
+    return NULL;
+}
+
+TreeNode* peekStack(Stack* s) {
+    if (s->top >= 0) return s->arr[s->top];
+    return NULL;
+}
+
+// In-order Iterative using Stack
+void inorderIterative(TreeNode* root) {
+    Stack s;
+    s.top = -1;
+    TreeNode* current = root;
     
-    while (!isQueueEmpty(q)) {
-        TreeNode* current = dequeue(q);
+    while (current != NULL || s.top >= 0) {
+        while (current != NULL) {
+            pushStack(&s, current);
+            current = current->left;
+        }
+        current = popStack(&s);
         printf("%d ", current->data);
-        
-        if (current->left != NULL) enqueue(q, current->left);
-        if (current->right != NULL) enqueue(q, current->right);
+        current = current->right;
     }
 }
-// Output: 1 2 3 4 5 6 7</code></pre>
+
+// Pre-order Iterative
+void preorderIterative(TreeNode* root) {
+    if (root == NULL) return;
+    Stack s;
+    s.top = -1;
+    pushStack(&s, root);
+    
+    while (s.top >= 0) {
+        TreeNode* node = popStack(&s);
+        printf("%d ", node->data);
+        
+        if (node->right) pushStack(&s, node->right);
+        if (node->left) pushStack(&s, node->left);
+    }
+}
+
+// ========== LEVEL-ORDER TRAVERSAL ==========
+
+void levelOrderTraversal(TreeNode* root) {
+    if (root == NULL) return;
+    Queue q;
+    q.front = 0;
+    q.rear = -1;
+    
+    q.arr[++q.rear] = root;
+    
+    while (q.front <= q.rear) {
+        TreeNode* current = q.arr[q.front++];
+        printf("%d ", current->data);
+        
+        if (current->left) q.arr[++q.rear] = current->left;
+        if (current->right) q.arr[++q.rear] = current->right;
+    }
+}
+
+int main() {
+    printf("=== TREE TRAVERSAL METHODS ===\\n\\n");
+    
+    //        1
+    //       / \\
+    //      2   3
+    //     / \\ / \\
+    //    4  5 6  7
+    
+    TreeNode* root = createNode(1);
+    root->left = createNode(2);
+    root->right = createNode(3);
+    root->left->left = createNode(4);
+    root->left->right = createNode(5);
+    root->right->left = createNode(6);
+    root->right->right = createNode(7);
+    
+    printf("RECURSIVE TRAVERSALS:\\n");
+    printf("1. In-order: ");
+    inorderRecursive(root);
+    printf("\\n");
+    
+    printf("2. Pre-order: ");
+    preorderRecursive(root);
+    printf("\\n");
+    
+    printf("3. Post-order: ");
+    postorderRecursive(root);
+    printf("\\n");
+    
+    printf("\\nNON-RECURSIVE TRAVERSALS:\\n");
+    printf("4. In-order (Iterative): ");
+    inorderIterative(root);
+    printf("\\n");
+    
+    printf("5. Pre-order (Iterative): ");
+    preorderIterative(root);
+    printf("\\n");
+    
+    printf("\\n6. Level-Order: ");
+    levelOrderTraversal(root);
+    printf("\\n");
+    
+    return 0;
+}</code></pre>
                     </div>
                 </div>
                 <div class="code-section">
@@ -934,12 +1468,24 @@ NON-RECURSIVE TRAVERSALS:
             <div class="program-section">
                 <div class="program-title">8. Advanced Tree Structures</div>
                 <div class="program-description">
-                    <strong>Types:</strong> Binary Search Tree, AVL Tree, Red-Black Tree, B-Tree, B+ Tree
+                    <strong>Types:</strong> Binary Search Tree, AVL Tree, Red-Black Tree
                 </div>
                 <div class="code-section">
-                    <div class="code-label">📝 Binary Search Tree Insertion:</div>
+                    <div class="code-label">📝 Advanced Trees Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">BSTNode* insertBST(BSTNode* root, int data) {
+                        <pre><code class="language-c">#include "advanced_trees.h"
+
+// ========== BINARY SEARCH TREE ==========
+
+BSTNode* createBSTNode(int data) {
+    BSTNode* node = (BSTNode*)malloc(sizeof(BSTNode));
+    node->data = data;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+BSTNode* insertBST(BSTNode* root, int data) {
     if (root == NULL) return createBSTNode(data);
     
     if (data < root->data)
@@ -949,34 +1495,128 @@ NON-RECURSIVE TRAVERSALS:
     
     return root;
 }
-// Property: Left < Parent < Right</code></pre>
-                    </div>
-                </div>
-                <div class="code-section">
-                    <div class="code-label">📝 AVL Tree Insertion with Balancing:</div>
-                    <div class="code-container">
-                        <pre><code class="language-c">AVLNode* insertAVL(AVLNode* node, int data) {
-    if (node == NULL) return createAVLNode(data);
+
+void inorderBST(BSTNode* root) {
+    if (root == NULL) return;
+    inorderBST(root->left);
+    printf("%d ", root->data);
+    inorderBST(root->right);
+}
+
+// ========== AVL TREE ==========
+
+AVLNode* createAVLNode(int data) {
+    AVLNode* node = (AVLNode*)malloc(sizeof(AVLNode));
+    node->data = data;
+    node->height = 1;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+int getHeight(AVLNode* node) {
+    return (node == NULL) ? 0 : node->height;
+}
+
+int getBalance(AVLNode* node) {
+    return (node == NULL) ? 0 : getHeight(node->left) - getHeight(node->right);
+}
+
+AVLNode* rotateRight(AVLNode* y) {
+    AVLNode* x = y->left;
+    AVLNode* T2 = x->right;
     
-    // Insert as in BST
-    if (data < node->data)
-        node->left = insertAVL(node->left, data);
+    x->right = y;
+    y->left = T2;
+    
+    y->height = 1 + (getHeight(y->left) > getHeight(y->right) ? 
+                     getHeight(y->left) : getHeight(y->right));
+    x->height = 1 + (getHeight(x->left) > getHeight(x->right) ? 
+                     getHeight(x->left) : getHeight(x->right));
+    
+    return x;
+}
+
+AVLNode* rotateLeft(AVLNode* x) {
+    AVLNode* y = x->right;
+    AVLNode* T2 = y->left;
+    
+    y->left = x;
+    x->right = T2;
+    
+    x->height = 1 + (getHeight(x->left) > getHeight(x->right) ? 
+                     getHeight(x->left) : getHeight(x->right));
+    y->height = 1 + (getHeight(y->left) > getHeight(y->right) ? 
+                     getHeight(y->left) : getHeight(y->right));
+    
+    return y;
+}
+
+AVLNode* insertAVL(AVLNode* root, int data) {
+    if (root == NULL) return createAVLNode(data);
+    
+    if (data < root->data)
+        root->left = insertAVL(root->left, data);
+    else if (data > root->data)
+        root->right = insertAVL(root->right, data);
     else
-        node->right = insertAVL(node->right, data);
+        return root;
     
-    // Update height
-    node->height = 1 + max(getHeight(node->left), getHeight(node->right));
+    root->height = 1 + (getHeight(root->left) > getHeight(root->right) ? 
+                        getHeight(root->left) : getHeight(root->right));
     
-    // Get balance factor
-    int balance = getBalance(node);
+    int balance = getBalance(root);
     
-    // Left Heavy - Right Rotation
-    if (balance > 1 && getBalance(node->left) >= 0)
-        return rotateRight(node);
+    if (balance > 1 && data < root->left->data)
+        return rotateRight(root);
     
-    // Right Heavy - Left Rotation
-    if (balance < -1 && getBalance(node->right) <= 0)
-        return rotateLeft(node);
+    if (balance < -1 && data > root->right->data)
+        return rotateLeft(root);
+    
+    if (balance > 1 && data > root->left->data) {
+        root->left = rotateLeft(root->left);
+        return rotateRight(root);
+    }
+    
+    if (balance < -1 && data < root->right->data) {
+        root->right = rotateRight(root->right);
+        return rotateLeft(root);
+    }
+    
+    return root;
+}
+
+void inorderAVL(AVLNode* root) {
+    if (root == NULL) return;
+    inorderAVL(root->left);
+    printf("%d ", root->data);
+    inorderAVL(root->right);
+}
+
+int main() {
+    printf("=== ADVANCED TREE STRUCTURES ===\\n\\n");
+    
+    printf("1. BINARY SEARCH TREE:\\n");
+    BSTNode* bst = NULL;
+    int bst_arr[] = {50, 30, 70, 20, 40, 60, 80};
+    for (int i = 0; i < 7; i++) {
+        bst = insertBST(bst, bst_arr[i]);
+    }
+    printf("BST In-order: ");
+    inorderBST(bst);
+    printf("\\n\\n");
+    
+    printf("2. AVL TREE:\\n");
+    AVLNode* avl = NULL;
+    int avl_arr[] = {50, 30, 70, 20, 40, 60, 80};
+    for (int i = 0; i < 7; i++) {
+        avl = insertAVL(avl, avl_arr[i]);
+    }
+    printf("AVL In-order: ");
+    inorderAVL(avl);
+    printf("\\n");
+    
+    return 0;
 }</code></pre>
                     </div>
                 </div>
@@ -1045,9 +1685,31 @@ B+ Tree stores all data in leaf nodes</div>
                     <strong>Methods:</strong> DFS, BFS, Topological Sort, Cycle Detection
                 </div>
                 <div class="code-section">
-                    <div class="code-label">📝 Depth-First Search (DFS):</div>
+                    <div class="code-label">📝 Graph Traversal Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">void dfsUtil(Graph* graph, int vertex, int visited[]) {
+                        <pre><code class="language-c">#include "graph_traversal.h"
+
+// Graph creation
+Graph* createGraph(int vertices) {
+    Graph* graph = (Graph*)malloc(sizeof(Graph));
+    graph->vertices = vertices;
+    
+    for (int i = 0; i < vertices; i++) {
+        for (int j = 0; j < vertices; j++) {
+            graph->adj[i][j] = 0;
+        }
+    }
+    return graph;
+}
+
+// Add edge
+void addEdge(Graph* graph, int u, int v) {
+    graph->adj[u][v] = 1;
+    graph->adj[v][u] = 1;
+}
+
+// ========== DEPTH-FIRST SEARCH (DFS) ==========
+void dfsUtil(Graph* graph, int vertex, int visited[]) {
     visited[vertex] = 1;
     printf("%d ", vertex);
     
@@ -1059,35 +1721,68 @@ B+ Tree stores all data in leaf nodes</div>
 }
 
 void dfs(Graph* graph, int start) {
-    int visited[MAX] = {0};
+    int visited[MAX_VERTICES] = {0};
+    printf("DFS from vertex %d: ", start);
     dfsUtil(graph, start, visited);
+    printf("\\n");
 }
-// Time: O(V + E)</code></pre>
-                    </div>
-                </div>
-                <div class="code-section">
-                    <div class="code-label">📝 Breadth-First Search (BFS):</div>
-                    <div class="code-container">
-                        <pre><code class="language-c">void bfs(Graph* graph, int start) {
-    int visited[MAX] = {0};
-    Queue* q = createQueue();
+
+// ========== BREADTH-FIRST SEARCH (BFS) ==========
+void bfs(Graph* graph, int start) {
+    int visited[MAX_VERTICES] = {0};
+    Queue q;
+    q.front = 0;
+    q.rear = -1;
     
     visited[start] = 1;
-    enqueue(q, start);
+    q.arr[++q.rear] = start;
     
-    while (!isQueueEmpty(q)) {
-        int vertex = dequeue(q);
+    printf("BFS from vertex %d: ", start);
+    while (q.front <= q.rear) {
+        int vertex = q.arr[q.front++];
         printf("%d ", vertex);
         
         for (int i = 0; i < graph->vertices; i++) {
             if (graph->adj[vertex][i] == 1 && !visited[i]) {
                 visited[i] = 1;
-                enqueue(q, i);
+                q.arr[++q.rear] = i;
             }
         }
     }
+    printf("\\n");
 }
-// Time: O(V + E)</code></pre>
+
+// Display adjacency matrix
+void displayAdjacencyMatrix(Graph* graph) {
+    printf("\\nAdjacency Matrix:\\n");
+    for (int i = 0; i < graph->vertices; i++) {
+        for (int j = 0; j < graph->vertices; j++) {
+            printf("%d ", graph->adj[i][j]);
+        }
+        printf("\\n");
+    }
+}
+
+int main() {
+    printf("=== GRAPH TRAVERSAL METHODS ===\\n\\n");
+    
+    Graph* graph = createGraph(5);
+    addEdge(graph, 0, 1);
+    addEdge(graph, 0, 2);
+    addEdge(graph, 1, 2);
+    addEdge(graph, 1, 3);
+    addEdge(graph, 2, 4);
+    addEdge(graph, 3, 4);
+    
+    printf("Graph has 5 vertices: 0, 1, 2, 3, 4\\n");
+    displayAdjacencyMatrix(graph);
+    
+    printf("\\nTRAVERSAL METHODS:\\n");
+    dfs(graph, 0);
+    bfs(graph, 0);
+    
+    return 0;
+}</code></pre>
                     </div>
                 </div>
                 <div class="code-section">
@@ -1157,57 +1852,135 @@ Cycle detected in graph!</div>
                     <strong>Methods:</strong> Division, Multiplication, Mid-square, Folding
                 </div>
                 <div class="code-section">
-                    <div class="code-label">📝 Division Method:</div>
+                    <div class="code-label">📝 Hash Functions Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">// h(k) = k mod m
+                        <pre><code class="language-c">#include "hash_functions.h"
+
+// ========== HASH FUNCTIONS ==========
+
+// Division Method: h(k) = k mod m
 int divisionMethod(int key, int tableSize) {
     return key % tableSize;
 }
 
-// Simple but prone to clustering
-// m should be prime for better distribution
-// Example: h(23) = 23 % 100 = 23
-//          h(123) = 123 % 100 = 23 (collision)</code></pre>
-                    </div>
-                </div>
-                <div class="code-section">
-                    <div class="code-label">📝 Multiplication Method:</div>
-                    <div class="code-container">
-                        <pre><code class="language-c">// h(k) = floor(m * frac(k*A))
-// where A is a constant (0 < A < 1)
-// Often A = (√5 - 1)/2 ≈ 0.618 (golden ratio)
+// Multiplication Method: h(k) = floor(m * frac(k*A))
 int multiplicationMethod(int key, int tableSize) {
     double A = 0.618033988;
     double value = (key * A);
     return (int)((value - (int)value) * tableSize);
-}</code></pre>
-                    </div>
-                </div>
-                <div class="code-section">
-                    <div class="code-label">📝 Mid-square Method:</div>
-                    <div class="code-container">
-                        <pre><code class="language-c">// Square the key and extract middle digits
+}
+
+// Mid-square Method
 int midSquareMethod(int key, int tableSize) {
     long long squared = (long long)key * key;
-    // Extract middle digits of squared value
-    // h(23) = 529 -> extract middle -> 2
-    // h(45) = 2025 -> extract middle -> 2
-}</code></pre>
-                    </div>
-                </div>
-                <div class="code-section">
-                    <div class="code-label">📝 Folding Method:</div>
-                    <div class="code-container">
-                        <pre><code class="language-c">// Divide key into parts and sum them
+    int numDigits = 0;
+    long long temp = squared;
+    
+    while (temp > 0) {
+        numDigits++;
+        temp /= 10;
+    }
+    
+    int start = numDigits / 4;
+    int count = numDigits / 2;
+    
+    temp = squared;
+    for (int i = 0; i < start; i++) {
+        temp /= 10;
+    }
+    
+    int result = 0;
+    for (int i = 0; i < count; i++) {
+        result = result * 10 + (temp % 10);
+        temp /= 10;
+    }
+    
+    return result % tableSize;
+}
+
+// Folding Method
 int foldingMethod(int key, int tableSize) {
     int sum = 0;
     while (key > 0) {
-        sum += key % 100;  // Fold into 2-digit parts
+        sum += key % 100;
         key /= 100;
     }
     return sum % tableSize;
 }
-// Example: 12345 -> 12 + 34 + 5 = 51 -> 51 % m</code></pre>
+
+// Squaring Method
+int squaringMethod(int key, int tableSize) {
+    long long squared = (long long)key * key;
+    return (squared / 100) % tableSize;
+}
+
+// Digit Extraction Method
+int digitExtractionMethod(int key, int tableSize) {
+    int extracted = 0;
+    int multiplier = 1;
+    int digit_pos = 0;
+    
+    while (key > 0 && digit_pos < 3) {
+        extracted += (key % 10) * multiplier;
+        multiplier *= 10;
+        key /= 10;
+        digit_pos++;
+    }
+    
+    return extracted % tableSize;
+}
+
+int main() {
+    printf(\"=== HASH FUNCTIONS ===\\n\\n\");
+    
+    int keys[] = {23, 45, 56, 12, 34, 78, 90};
+    int n = sizeof(keys) / sizeof(keys[0]);
+    int tableSize = 100;
+    
+    printf(\"Keys: \");
+    for (int i = 0; i < n; i++) {
+        printf(\"%d \", keys[i]);
+    }
+    printf(\"\\n\\n\");
+    
+    printf(\"1. DIVISION METHOD (h(k) = k mod m):\\n\");
+    printf(\"Hash values: \");
+    for (int i = 0; i < n; i++) {
+        printf(\"%d \", divisionMethod(keys[i], tableSize));
+    }
+    printf(\"\\n\\n\");
+    
+    printf(\"2. MULTIPLICATION METHOD (h(k) = floor(m * frac(k*A))):\\n\");
+    printf(\"A = 0.618033988\\n\");
+    printf(\"Hash values: \");
+    for (int i = 0; i < n; i++) {
+        printf(\"%d \", multiplicationMethod(keys[i], tableSize));
+    }
+    printf(\"\\n\\n\");
+    
+    printf(\"3. MID-SQUARE METHOD:\\n\");
+    printf(\"Hash values: \");
+    for (int i = 0; i < n; i++) {
+        printf(\"%d \", midSquareMethod(keys[i], tableSize));
+    }
+    printf(\"\\n\\n\");
+    
+    printf(\"4. FOLDING METHOD:\\n\");
+    printf(\"Hash values: \");
+    for (int i = 0; i < n; i++) {
+        printf(\"%d \", foldingMethod(keys[i], tableSize));
+    }
+    printf(\"\\n\\n\");
+    
+    printf(\"5. DIGIT EXTRACTION METHOD:\\n\");
+    printf(\"Hash values: \");
+    for (int i = 0; i < n; i++) {
+        printf(\"%d \", digitExtractionMethod(keys[i], tableSize));
+    }
+    printf(\"\\n\");
+    
+    return 0;
+}</code></pre>
                     </div>
                 </div>
                 <div class="code-section">
