@@ -288,7 +288,13 @@
                 <div class="code-section">
                     <div class="code-label">📝 C Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">#include "singly_linked_list.h"
+                        <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
 
 // Create a new node
 Node* createNode(int data) {
@@ -427,7 +433,14 @@ List: 10 -> 20 -> 30 -> 40 -> NULL</div>
                 <div class="code-section">
                     <div class="code-label">📝 C Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">#include "doubly_linked_list.h"
+                        <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct DNode {
+    int data;
+    struct DNode* next;
+    struct DNode* prev;
+} DNode;
 
 // Create a new node
 DNode* createNode(int data) {
@@ -592,7 +605,13 @@ Backward: NULL <-  45 <->  35 <->  25 <->  15 <-> NULL</div>
                 <div class="code-section">
                     <div class="code-label">📝 C Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">#include "circular_linked_list.h"
+                        <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct CNode {
+    int data;
+    struct CNode* next;
+} CNode;
 
 // Create a new node
 CNode* createNode(int data) {
@@ -742,7 +761,24 @@ List: 12 -> 22 -> 32 -> 42 -> (back to 12)</div>
                 <div class="code-section">
                     <div class="code-label">📝 C Code (Array Implementation):</div>
                     <div class="code-container">
-                        <pre><code class="language-c">#include "stack_array_adt.h"
+                        <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define MAX_SIZE 100
+
+typedef struct {
+    int arr[MAX_SIZE];
+    int top;
+} StackArray;
+
+typedef struct StackNode {
+    int data;
+    struct StackNode* next;
+} StackNode;
+
+typedef struct {
+    StackNode* top;
+} StackADT;
 
 // ========== STACK USING ARRAY ==========
 
@@ -911,7 +947,25 @@ Stack (ADT): 100</div>
                 <div class="code-section">
                     <div class="code-label">📝 C Code (Array Implementation):</div>
                     <div class="code-container">
-                        <pre><code class="language-c">#include "queue_array_adt.h"
+                        <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+#define MAX_SIZE 100
+
+typedef struct {
+    int arr[MAX_SIZE];
+    int front, rear;
+} QueueArray;
+
+typedef struct QueueNode {
+    int data;
+    struct QueueNode* next;
+} QueueNode;
+
+typedef struct {
+    QueueNode* front;
+    QueueNode* rear;
+} QueueADT;
 
 // ========== QUEUE USING ARRAY ==========
 
@@ -1064,7 +1118,9 @@ Queue (ADT): 300</div>
                 <div class="code-section">
                     <div class="code-label">📝 Sorting Algorithms Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">#include "sorting_algorithms.h"
+                        <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
 
 // ========== RADIX SORT ==========
 int getMax(int arr[], int n) {
@@ -1277,7 +1333,24 @@ Sorted: 2 8 45 50 75 90 170 200</div>
                 <div class="code-section">
                     <div class="code-label">📝 Tree Traversal Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">#include "tree_traversal.h"
+                        <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct TreeNode {
+    int data;
+    struct TreeNode* left;
+    struct TreeNode* right;
+} TreeNode;
+
+typedef struct {
+    TreeNode* arr[100];
+    int top;
+} Stack;
+
+typedef struct {
+    TreeNode* arr[100];
+    int front, rear;
+} Queue;
 
 // Create a new tree node
 TreeNode* createNode(int data) {
@@ -1473,7 +1546,32 @@ NON-RECURSIVE TRAVERSALS:
                 <div class="code-section">
                     <div class="code-label">📝 Advanced Trees Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">#include "advanced_trees.h"
+                        <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+
+typedef struct BSTNode {
+    int data;
+    struct BSTNode* left;
+    struct BSTNode* right;
+} BSTNode;
+
+typedef struct AVLNode {
+    int data;
+    int height;
+    struct AVLNode* left;
+    struct AVLNode* right;
+} AVLNode;
+
+typedef enum { RED, BLACK } Color;
+
+typedef struct RBNode {
+    int data;
+    Color color;
+    struct RBNode* left;
+    struct RBNode* right;
+    struct RBNode* parent;
+} RBNode;
 
 // ========== BINARY SEARCH TREE ==========
 
@@ -1687,7 +1785,21 @@ B+ Tree stores all data in leaf nodes</div>
                 <div class="code-section">
                     <div class="code-label">📝 Graph Traversal Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">#include "graph_traversal.h"
+                        <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+#define MAX_VERTICES 10
+
+typedef struct {
+    int adj[MAX_VERTICES][MAX_VERTICES];
+    int vertices;
+} Graph;
+
+typedef struct {
+    int arr[MAX_VERTICES];
+    int front, rear;
+} Queue;
 
 // Graph creation
 Graph* createGraph(int vertices) {
@@ -1854,7 +1966,23 @@ Cycle detected in graph!</div>
                 <div class="code-section">
                     <div class="code-label">📝 Hash Functions Code:</div>
                     <div class="code-container">
-                        <pre><code class="language-c">#include "hash_functions.h"
+                        <pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;math.h&gt;
+
+#define TABLE_SIZE 100
+
+typedef struct {
+    int key;
+    int value;
+    int occupied;
+} HashEntry;
+
+typedef struct {
+    HashEntry table[TABLE_SIZE];
+    int size;
+} HashTable;
 
 // ========== HASH FUNCTIONS ==========
 
