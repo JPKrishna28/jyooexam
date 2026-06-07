@@ -1,4 +1,20 @@
-#include "hash_functions.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+#define TABLE_SIZE 100
+
+typedef struct {
+    int key;
+    int value;
+    int occupied;
+} HashEntry;
+
+typedef struct {
+    HashEntry table[TABLE_SIZE];
+    int size;
+} HashTable;
 
 // ========== DIVISION METHOD ==========
 int divisionMethod(int key, int tableSize) {

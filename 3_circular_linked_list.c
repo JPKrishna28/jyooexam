@@ -1,4 +1,10 @@
-#include "circular_linked_list.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct CNode {
+    int data;
+    struct CNode* next;
+} CNode;
 
 // Create a new node
 CNode* createNode(int data) {

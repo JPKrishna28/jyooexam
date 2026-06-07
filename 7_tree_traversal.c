@@ -1,4 +1,21 @@
-#include "tree_traversal.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct TreeNode {
+    int data;
+    struct TreeNode* left;
+    struct TreeNode* right;
+} TreeNode;
+
+typedef struct {
+    TreeNode* arr[100];
+    int top;
+} Stack;
+
+typedef struct {
+    TreeNode* arr[100];
+    int front, rear;
+} Queue;
 
 // Create a new tree node
 TreeNode* createNode(int data) {

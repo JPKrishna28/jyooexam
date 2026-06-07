@@ -1,4 +1,11 @@
-#include "doubly_linked_list.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct DNode {
+    int data;
+    struct DNode* next;
+    struct DNode* prev;
+} DNode;
 
 // Create a new node
 DNode* createNode(int data) {

@@ -1,4 +1,10 @@
-#include "singly_linked_list.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node* next;
+} Node;
 
 // Create a new node
 Node* createNode(int data) {

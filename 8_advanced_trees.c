@@ -1,4 +1,29 @@
-#include "advanced_trees.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+typedef struct BSTNode {
+    int data;
+    struct BSTNode* left;
+    struct BSTNode* right;
+} BSTNode;
+
+typedef struct AVLNode {
+    int data;
+    int height;
+    struct AVLNode* left;
+    struct AVLNode* right;
+} AVLNode;
+
+typedef enum { RED, BLACK } Color;
+
+typedef struct RBNode {
+    int data;
+    Color color;
+    struct RBNode* left;
+    struct RBNode* right;
+    struct RBNode* parent;
+} RBNode;
 
 BSTNode* createBSTNode(int data) {
     BSTNode* node = (BSTNode*)malloc(sizeof(BSTNode));

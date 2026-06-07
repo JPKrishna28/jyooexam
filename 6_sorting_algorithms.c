@@ -1,4 +1,6 @@
-#include "sorting_algorithms.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 // ========== RADIX SORT ==========
 int getMax(int arr[], int n) {
