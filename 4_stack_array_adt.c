@@ -1,23 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-// Stack using Array
-#define MAX_SIZE 100
-
-typedef struct {
-    int arr[MAX_SIZE];
-    int top;
-} StackArray;
-
-// Stack using ADT (Linked List)
-typedef struct StackNode {
-    int data;
-    struct StackNode* next;
-} StackNode;
-
-typedef struct {
-    StackNode* top;
-} StackADT;
+#include "stack_array_adt.h"
 
 // ========== STACK USING ARRAY ==========
 

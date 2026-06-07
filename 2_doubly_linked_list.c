@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct DNode {
-    int data;
-    struct DNode* next;
-    struct DNode* prev;
-} DNode;
+#include "doubly_linked_list.h"
 
 // Create a new node
 DNode* createNode(int data) {
@@ -116,6 +109,15 @@ DNode* deleteAtPosition(DNode* head, int position) {
     return head;
 }
 
+// Peek - view first element
+int peek(DNode* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return -1;
+    }
+    return head->data;
+}
+
 // Forward traversal
 void traverseForward(DNode* head) {
     if (head == NULL) {
@@ -199,6 +201,13 @@ void demo() {
     head = deleteFromEnd(head);
     traverseForward(head);
     
+    
+    // Peek
+    printf("\n5. PEEK:\n");
+    int firstElement = peek(head);
+    if (firstElement != -1) {
+        printf("First element (peek): %d\n", firstElement);
+    }
     printf("Delete at position 2: ");
     head = deleteAtPosition(head, 2);
     traverseForward(head);

@@ -1,24 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-// Queue using Array
-#define MAX_SIZE 100
-
-typedef struct {
-    int arr[MAX_SIZE];
-    int front, rear;
-} QueueArray;
-
-// Queue using ADT (Linked List)
-typedef struct QueueNode {
-    int data;
-    struct QueueNode* next;
-} QueueNode;
-
-typedef struct {
-    QueueNode* front;
-    QueueNode* rear;
-} QueueADT;
+#include "queue_array_adt.h"
 
 // ========== QUEUE USING ARRAY ==========
 

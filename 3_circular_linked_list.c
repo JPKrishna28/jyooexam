@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct CNode {
-    int data;
-    struct CNode* next;
-} CNode;
+#include "circular_linked_list.h"
 
 // Create a new node
 CNode* createNode(int data) {
@@ -129,6 +123,15 @@ CNode* deleteAtPosition(CNode* head, int position) {
     return head;
 }
 
+// Peek - view first element
+int peek(CNode* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return -1;
+    }
+    return head->data;
+}
+
 // Traversal
 void traverse(CNode* head) {
     if (head == NULL) {
@@ -203,6 +206,13 @@ void demo() {
     // Traversal
     printf("4. TRAVERSAL:\n");
     traverse(head);
+    
+    // Peek
+    printf("\n5. PEEK:\n");
+    int firstElement = peek(head);
+    if (firstElement != -1) {
+        printf("First element (peek): %d\n", firstElement);
+    }
 }
 
 int main() {

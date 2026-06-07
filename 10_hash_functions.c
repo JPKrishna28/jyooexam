@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-
-#define TABLE_SIZE 100
+#include "hash_functions.h"
 
 // ========== DIVISION METHOD ==========
 int divisionMethod(int key, int tableSize) {

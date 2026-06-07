@@ -1,13 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-
-// ========== BINARY SEARCH TREE ==========
-typedef struct BSTNode {
-    int data;
-    struct BSTNode* left;
-    struct BSTNode* right;
-} BSTNode;
+#include "advanced_trees.h"
 
 BSTNode* createBSTNode(int data) {
     BSTNode* node = (BSTNode*)malloc(sizeof(BSTNode));

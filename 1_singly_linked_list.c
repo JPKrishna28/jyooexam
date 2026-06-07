@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct Node {
-    int data;
-    struct Node* next;
-} Node;
+#include "singly_linked_list.h"
 
 // Create a new node
 Node* createNode(int data) {
@@ -103,6 +97,15 @@ Node* deleteAtPosition(Node* head, int position) {
     return head;
 }
 
+// Peek - view first element
+int peek(Node* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return -1;
+    }
+    return head->data;
+}
+
 // Traversal - display all elements
 void traverse(Node* head) {
     if (head == NULL) {
@@ -166,6 +169,13 @@ void demo() {
     printf("Delete from end: ");
     head = deleteFromEnd(head);
     traverse(head);
+    
+    // Peek
+    printf("\n5. PEEK:\n");
+    int firstElement = peek(head);
+    if (firstElement != -1) {
+        printf("First element (peek): %d\n", firstElement);
+    }
     
     printf("Delete at position 2: ");
     head = deleteAtPosition(head, 2);

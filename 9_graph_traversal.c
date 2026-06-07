@@ -1,13 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define MAX_VERTICES 10
-
-typedef struct {
-    int adj[MAX_VERTICES][MAX_VERTICES];
-    int vertices;
-} Graph;
+#include "graph_traversal.h"
 
 // Graph creation
 Graph* createGraph(int vertices) {
