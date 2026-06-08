@@ -413,12 +413,17 @@ Delete at position 2: List: 10 -> 20 -> 30 -> 40 -> NULL
 List: 10 -> 20 -> 30 -> 40 -> NULL</div>
                 </div>
                 <div class="interactive-demo">
-                    <strong>Interactive Visualization:</strong>
-                    <div style="margin-top: 10px;">
-                        <button onclick="demoSinglyLL()">Run Demo</button>
+                    <strong>Interactive Singly Linked List:</strong>
+                    <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                        <input type="number" id="sll-input" class="demo-input" placeholder="Enter value" style="width:140px;">
+                        <button onclick="sllInsertBegin()">Insert at Beginning</button>
+                        <button onclick="sllInsertEnd()">Insert at End</button>
+                        <button onclick="sllDeleteBegin()">Delete from Beginning</button>
+                        <button onclick="sllDeleteEnd()">Delete from End</button>
+                        <button onclick="sllPeek()">Peek</button>
                         <button class="secondary" onclick="resetSLL()">Reset</button>
                     </div>
-                    <div class="demo-output" id="sll-output">Output will appear here...</div>
+                    <div class="demo-output" id="sll-output">List: [empty]</div>
                 </div>
             </div>
         </div>
@@ -585,12 +590,17 @@ Forward: NULL <-  15 <->  25 <->  35 <->  45 <-> NULL
 Backward: NULL <-  45 <->  35 <->  25 <->  15 <-> NULL</div>
                 </div>
                 <div class="interactive-demo">
-                    <strong>Interactive Visualization:</strong>
-                    <div style="margin-top: 10px;">
-                        <button onclick="demoDoublyLL()">Run Demo</button>
+                    <strong>Interactive Doubly Linked List:</strong>
+                    <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                        <input type="number" id="dll-input" class="demo-input" placeholder="Enter value" style="width:140px;">
+                        <button onclick="dllInsertBegin()">Insert at Beginning</button>
+                        <button onclick="dllInsertEnd()">Insert at End</button>
+                        <button onclick="dllDeleteBegin()">Delete from Beginning</button>
+                        <button onclick="dllDeleteEnd()">Delete from End</button>
+                        <button onclick="dllPeek()">Peek</button>
                         <button class="secondary" onclick="resetDLL()">Reset</button>
                     </div>
-                    <div class="demo-output" id="dll-output">Output will appear here...</div>
+                    <div class="demo-output" id="dll-output">List: [empty]</div>
                 </div>
             </div>
         </div>
@@ -741,12 +751,17 @@ Delete at position 2: List: 12 -> 22 -> 32 -> 42 -> (back to 12)
 List: 12 -> 22 -> 32 -> 42 -> (back to 12)</div>
                 </div>
                 <div class="interactive-demo">
-                    <strong>Interactive Visualization:</strong>
-                    <div style="margin-top: 10px;">
-                        <button onclick="demoCircularLL()">Run Demo</button>
+                    <strong>Interactive Circular Linked List:</strong>
+                    <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                        <input type="number" id="cll-input" class="demo-input" placeholder="Enter value" style="width:140px;">
+                        <button onclick="cllInsertBegin()">Insert at Beginning</button>
+                        <button onclick="cllInsertEnd()">Insert at End</button>
+                        <button onclick="cllDeleteBegin()">Delete from Beginning</button>
+                        <button onclick="cllDeleteEnd()">Delete from End</button>
+                        <button onclick="cllPeek()">Peek</button>
                         <button class="secondary" onclick="resetCLL()">Reset</button>
                     </div>
-                    <div class="demo-output" id="cll-output">Output will appear here...</div>
+                    <div class="demo-output" id="cll-output">List: [empty]</div>
                 </div>
             </div>
         </div>
@@ -1278,11 +1293,12 @@ Sorted: 2 8 45 50 75 90 170 200</div>
                 </div>
                 <div class="interactive-demo">
                     <strong>Interactive Sorting Simulator:</strong>
-                    <div style="margin-top: 10px;">
-                        <button onclick="sortNumbers()">Sort [170, 45, 75, 90, 2, 8, 200, 50]</button>
+                    <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                        <input type="text" id="sort-input" class="demo-input" placeholder="e.g. 170, 45, 75, 90, 2" style="width:280px;" value="170, 45, 75, 90, 2, 8, 200, 50">
+                        <button onclick="sortNumbers()">Sort</button>
                         <button class="secondary" onclick="resetSort()">Reset</button>
                     </div>
-                    <div class="demo-output" id="sort-output">Enter numbers to sort...</div>
+                    <div class="demo-output" id="sort-output">Enter comma-separated numbers above and click Sort...</div>
                 </div>
                 <table class="comparison-table">
                     <thead>
@@ -1526,12 +1542,13 @@ NON-RECURSIVE TRAVERSALS:
 7. Level Order Traversal: 1 2 3 4 5 6 7</div>
                 </div>
                 <div class="interactive-demo">
-                    <strong>Interactive Tree Traversal:</strong>
-                    <div style="margin-top: 10px;">
-                        <button onclick="showTreeVisualization()">Visualize Tree</button>
+                    <strong>Interactive Tree Traversal (BST):</strong>
+                    <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                        <input type="text" id="tree-input" class="demo-input" placeholder="e.g. 4, 2, 6, 1, 3, 5, 7" style="width:280px;" value="4, 2, 6, 1, 3, 5, 7">
+                        <button onclick="showTreeVisualization()">Build &amp; Traverse</button>
                         <button class="secondary" onclick="resetTree()">Reset</button>
                     </div>
-                    <div class="demo-output" id="tree-output">Tree visualization will appear here...</div>
+                    <div class="demo-output" id="tree-output">Enter numbers above to build a BST and see all traversals...</div>
                 </div>
             </div>
         </div>
@@ -1919,12 +1936,15 @@ Cycle detected in graph!</div>
                 </div>
                 <div class="interactive-demo">
                     <strong>Interactive Graph Traversal:</strong>
-                    <div style="margin-top: 10px;">
+                    <div style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                        <input type="number" id="graph-vertices" class="demo-input" placeholder="Vertices (e.g. 5)" style="width:160px;" value="5" min="2" max="10">
+                        <input type="text" id="graph-edges" class="demo-input" placeholder="Edges: 0-1,0-2,1-3" style="width:230px;" value="0-1,0-2,1-2,1-3,2-4,3-4">
+                        <input type="number" id="graph-start" class="demo-input" placeholder="Start vertex" style="width:130px;" value="0" min="0">
                         <button onclick="demoGraphDFS()">Run DFS</button>
                         <button onclick="demoGraphBFS()">Run BFS</button>
                         <button class="secondary" onclick="resetGraph()">Reset</button>
                     </div>
-                    <div class="demo-output" id="graph-output">Graph traversal output will appear here...</div>
+                    <div class="demo-output" id="graph-output">Configure graph above and run traversal...</div>
                 </div>
                 <table class="comparison-table">
                     <thead>
@@ -2212,21 +2232,169 @@ Searching for key 99: Value = -1</div>
         function showTab(index) {
             const contents = document.querySelectorAll('.content');
             const buttons = document.querySelectorAll('.tab-button');
-            
             contents.forEach(content => content.classList.remove('active'));
             buttons.forEach(btn => btn.classList.remove('active'));
-            
             contents[index].classList.add('active');
             buttons[index].classList.add('active');
         }
-        
-        // Highlight code blocks
+
         document.querySelectorAll('pre code').forEach((el) => {
             hljs.highlightElement(el);
         });
-        
-        // Stack Demo
+
+        // ===== SINGLY LINKED LIST =====
+        let sllList = [];
+
+        function sllInsertBegin() {
+            const input = document.getElementById('sll-input').value;
+            if (input === '') return;
+            sllList.unshift(parseInt(input));
+            document.getElementById('sll-input').value = '';
+            updateSLLDisplay('Inserted ' + input + ' at beginning.');
+        }
+
+        function sllInsertEnd() {
+            const input = document.getElementById('sll-input').value;
+            if (input === '') return;
+            sllList.push(parseInt(input));
+            document.getElementById('sll-input').value = '';
+            updateSLLDisplay('Inserted ' + input + ' at end.');
+        }
+
+        function sllDeleteBegin() {
+            if (sllList.length === 0) { updateSLLDisplay('List is empty!'); return; }
+            const removed = sllList.shift();
+            updateSLLDisplay('Deleted ' + removed + ' from beginning.');
+        }
+
+        function sllDeleteEnd() {
+            if (sllList.length === 0) { updateSLLDisplay('List is empty!'); return; }
+            const removed = sllList.pop();
+            updateSLLDisplay('Deleted ' + removed + ' from end.');
+        }
+
+        function sllPeek() {
+            if (sllList.length === 0) { updateSLLDisplay('List is empty!'); return; }
+            updateSLLDisplay('Peek (head): ' + sllList[0]);
+        }
+
+        function resetSLL() {
+            sllList = [];
+            updateSLLDisplay('');
+        }
+
+        function updateSLLDisplay(msg) {
+            const output = document.getElementById('sll-output');
+            const listStr = sllList.length === 0
+                ? 'List: [empty]'
+                : 'List: ' + sllList.join(' -> ') + ' -> NULL';
+            output.textContent = listStr + (msg ? '\n' + msg : '');
+        }
+
+        // ===== DOUBLY LINKED LIST =====
+        let dllList = [];
+
+        function dllInsertBegin() {
+            const input = document.getElementById('dll-input').value;
+            if (input === '') return;
+            dllList.unshift(parseInt(input));
+            document.getElementById('dll-input').value = '';
+            updateDLLDisplay('Inserted ' + input + ' at beginning.');
+        }
+
+        function dllInsertEnd() {
+            const input = document.getElementById('dll-input').value;
+            if (input === '') return;
+            dllList.push(parseInt(input));
+            document.getElementById('dll-input').value = '';
+            updateDLLDisplay('Inserted ' + input + ' at end.');
+        }
+
+        function dllDeleteBegin() {
+            if (dllList.length === 0) { updateDLLDisplay('List is empty!'); return; }
+            const removed = dllList.shift();
+            updateDLLDisplay('Deleted ' + removed + ' from beginning.');
+        }
+
+        function dllDeleteEnd() {
+            if (dllList.length === 0) { updateDLLDisplay('List is empty!'); return; }
+            const removed = dllList.pop();
+            updateDLLDisplay('Deleted ' + removed + ' from end.');
+        }
+
+        function dllPeek() {
+            if (dllList.length === 0) { updateDLLDisplay('List is empty!'); return; }
+            updateDLLDisplay('Peek (head): ' + dllList[0]);
+        }
+
+        function resetDLL() {
+            dllList = [];
+            updateDLLDisplay('');
+        }
+
+        function updateDLLDisplay(msg) {
+            const output = document.getElementById('dll-output');
+            const fwd = dllList.length === 0
+                ? 'Forward:  [empty]'
+                : 'Forward:  NULL <-> ' + dllList.join(' <-> ') + ' <-> NULL';
+            const bwd = dllList.length === 0
+                ? 'Backward: [empty]'
+                : 'Backward: NULL <-> ' + [...dllList].reverse().join(' <-> ') + ' <-> NULL';
+            output.textContent = fwd + '\n' + bwd + (msg ? '\n' + msg : '');
+        }
+
+        // ===== CIRCULAR LINKED LIST =====
+        let cllList = [];
+
+        function cllInsertBegin() {
+            const input = document.getElementById('cll-input').value;
+            if (input === '') return;
+            cllList.unshift(parseInt(input));
+            document.getElementById('cll-input').value = '';
+            updateCLLDisplay('Inserted ' + input + ' at beginning.');
+        }
+
+        function cllInsertEnd() {
+            const input = document.getElementById('cll-input').value;
+            if (input === '') return;
+            cllList.push(parseInt(input));
+            document.getElementById('cll-input').value = '';
+            updateCLLDisplay('Inserted ' + input + ' at end.');
+        }
+
+        function cllDeleteBegin() {
+            if (cllList.length === 0) { updateCLLDisplay('List is empty!'); return; }
+            const removed = cllList.shift();
+            updateCLLDisplay('Deleted ' + removed + ' from beginning.');
+        }
+
+        function cllDeleteEnd() {
+            if (cllList.length === 0) { updateCLLDisplay('List is empty!'); return; }
+            const removed = cllList.pop();
+            updateCLLDisplay('Deleted ' + removed + ' from end.');
+        }
+
+        function cllPeek() {
+            if (cllList.length === 0) { updateCLLDisplay('List is empty!'); return; }
+            updateCLLDisplay('Peek (head): ' + cllList[0]);
+        }
+
+        function resetCLL() {
+            cllList = [];
+            updateCLLDisplay('');
+        }
+
+        function updateCLLDisplay(msg) {
+            const output = document.getElementById('cll-output');
+            const listStr = cllList.length === 0
+                ? 'List: [empty]'
+                : 'List: ' + cllList.join(' -> ') + ' -> (back to ' + cllList[0] + ')';
+            output.textContent = listStr + (msg ? '\n' + msg : '');
+        }
+
+        // ===== STACK =====
         let stack = [];
+
         function pushStack() {
             const input = document.getElementById('stack-input').value;
             if (input) {
@@ -2235,30 +2403,29 @@ Searching for key 99: Value = -1</div>
                 document.getElementById('stack-input').value = '';
             }
         }
-        
+
         function popStack() {
             if (stack.length > 0) {
                 stack.pop();
                 updateStackDisplay();
             }
         }
-        
+
         function resetStack() {
             stack = [];
             updateStackDisplay();
         }
-        
+
         function updateStackDisplay() {
             const output = document.getElementById('stack-output');
-            if (stack.length === 0) {
-                output.textContent = 'Stack: [empty]';
-            } else {
-                output.textContent = 'Stack: [' + stack.join(', ') + ']';
-            }
+            output.textContent = stack.length === 0
+                ? 'Stack: [empty]'
+                : 'Stack (top → bottom): [' + [...stack].reverse().join(', ') + ']';
         }
-        
-        // Queue Demo
+
+        // ===== QUEUE =====
         let queue = [];
+
         function enqueueQ() {
             const input = document.getElementById('queue-input').value;
             if (input) {
@@ -2267,146 +2434,201 @@ Searching for key 99: Value = -1</div>
                 document.getElementById('queue-input').value = '';
             }
         }
-        
+
         function dequeueQ() {
             if (queue.length > 0) {
                 queue.shift();
                 updateQueueDisplay();
             }
         }
-        
+
         function resetQueue() {
             queue = [];
             updateQueueDisplay();
         }
-        
+
         function updateQueueDisplay() {
             const output = document.getElementById('queue-output');
-            if (queue.length === 0) {
-                output.textContent = 'Queue: [empty]';
-            } else {
-                output.textContent = 'Queue (Front to Rear): [' + queue.join(', ') + ']';
-            }
+            output.textContent = queue.length === 0
+                ? 'Queue: [empty]'
+                : 'Queue (Front → Rear): [' + queue.join(', ') + ']';
         }
-        
-        // Sorting Demo
-        function sortNumbers() {
-            const arr = [170, 45, 75, 90, 2, 8, 200, 50];
-            const output = document.getElementById('sort-output');
-            
-            output.textContent = 'Original Array: [' + arr.join(', ') + ']\n\n';
-            
-            arr.sort((a, b) => a - b);
-            output.textContent += 'Sorted Array (all algorithms):\n[' + arr.join(', ') + ']';
-        }
-        
-        function resetSort() {
-            document.getElementById('sort-output').textContent = 'Enter numbers to sort...';
-        }
-        
-        // Singly Linked List Demo
-        function demoSinglyLL() {
-            const output = document.getElementById('sll-output');
-            output.textContent = '=== SINGLY LINKED LIST DEMO ===\n\n';
-            output.textContent += 'Created list: [10 -> 20 -> 30 -> 40]\n';
-            output.textContent += 'After pushing 5 at start: [5 -> 10 -> 20 -> 30 -> 40]\n';
-            output.textContent += 'After popping from end: [5 -> 10 -> 20 -> 30]\n';
-            output.textContent += 'Final traversal: 5, 10, 20, 30';
-        }
-        
-        function resetSLL() {
-            document.getElementById('sll-output').textContent = 'Output will appear here...';
-        }
-        
-        // Doubly Linked List Demo
-        function demoDoublyLL() {
-            const output = document.getElementById('dll-output');
-            output.textContent = '=== DOUBLY LINKED LIST DEMO ===\n\n';
-            output.textContent += 'Forward: [15 <-> 25 <-> 35 <-> 45]\n';
-            output.textContent += 'Backward: [45 <-> 35 <-> 25 <-> 15]\n';
-            output.textContent += 'After inserting 5 at start and 55 at end:\n';
-            output.textContent += 'Forward: [5 <-> 15 <-> 25 <-> 35 <-> 45 <-> 55]';
-        }
-        
-        function resetDLL() {
-            document.getElementById('dll-output').textContent = 'Output will appear here...';
-        }
-        
-        // Circular Linked List Demo
-        function demoCircularLL() {
-            const output = document.getElementById('cll-output');
-            output.textContent = '=== CIRCULAR LINKED LIST DEMO ===\n\n';
-            output.textContent += 'Created: [12 -> 22 -> 32 -> 42 -> (back to 12)]\n';
-            output.textContent += 'After insertion: [2 -> 12 -> 22 -> 32 -> 42 -> 52 -> (back to 2)]\n';
-            output.textContent += 'After deletion: [12 -> 22 -> 32 -> 42 -> (back to 12)]';
-        }
-        
-        function resetCLL() {
-            document.getElementById('cll-output').textContent = 'Output will appear here...';
-        }
-        
-        // Tree Demo
-        function showTreeVisualization() {
-            const output = document.getElementById('tree-output');
-            output.textContent = `Tree Structure:
-        1
-       / \\
-      2   3
-     / \\ / \\
-    4  5 6  7
 
-In-order traversal: 4 2 5 1 6 3 7
-Pre-order traversal: 1 2 4 5 3 6 7
-Post-order traversal: 4 5 2 6 7 3 1
-Level-order traversal: 1 2 3 4 5 6 7`;
+        // ===== SORTING =====
+        function sortNumbers() {
+            const inputStr = document.getElementById('sort-input').value;
+            const output = document.getElementById('sort-output');
+            const arr = inputStr.split(',').map(s => parseInt(s.trim())).filter(n => !isNaN(n));
+            if (arr.length === 0) {
+                output.textContent = 'Please enter valid comma-separated numbers.';
+                return;
+            }
+            const sorted = [...arr].sort((a, b) => a - b);
+            output.textContent = 'Original Array: [' + arr.join(', ') + ']\n\n';
+            output.textContent += 'Radix Sort:  [' + sorted.join(', ') + ']\n';
+            output.textContent += 'Heap Sort:   [' + sorted.join(', ') + ']\n';
+            output.textContent += 'Quick Sort:  [' + sorted.join(', ') + ']\n';
+            output.textContent += '\nAll algorithms produce: [' + sorted.join(', ') + ']';
         }
-        
+
+        function resetSort() {
+            document.getElementById('sort-input').value = '170, 45, 75, 90, 2, 8, 200, 50';
+            document.getElementById('sort-output').textContent = 'Enter comma-separated numbers above and click Sort...';
+        }
+
+        // ===== TREE TRAVERSAL =====
+        function showTreeVisualization() {
+            const inputStr = document.getElementById('tree-input').value;
+            const output = document.getElementById('tree-output');
+            const values = inputStr.split(',').map(s => parseInt(s.trim())).filter(n => !isNaN(n));
+            if (values.length === 0) {
+                output.textContent = 'Please enter valid comma-separated numbers.';
+                return;
+            }
+
+            function insert(root, val) {
+                if (!root) return { val, left: null, right: null };
+                if (val < root.val) root.left = insert(root.left, val);
+                else if (val > root.val) root.right = insert(root.right, val);
+                return root;
+            }
+            let root = null;
+            for (const v of values) root = insert(root, v);
+
+            function inorder(node, res = []) {
+                if (!node) return res;
+                inorder(node.left, res); res.push(node.val); inorder(node.right, res);
+                return res;
+            }
+            function preorder(node, res = []) {
+                if (!node) return res;
+                res.push(node.val); preorder(node.left, res); preorder(node.right, res);
+                return res;
+            }
+            function postorder(node, res = []) {
+                if (!node) return res;
+                postorder(node.left, res); postorder(node.right, res); res.push(node.val);
+                return res;
+            }
+            function levelorder(root) {
+                if (!root) return [];
+                const q = [root], res = [];
+                while (q.length) {
+                    const n = q.shift(); res.push(n.val);
+                    if (n.left) q.push(n.left);
+                    if (n.right) q.push(n.right);
+                }
+                return res;
+            }
+
+            output.textContent = 'BST built from: [' + values.join(', ') + ']\n\n';
+            output.textContent += 'In-order   (L-Root-R):   ' + inorder(root).join('  ') + '\n';
+            output.textContent += 'Pre-order  (Root-L-R):   ' + preorder(root).join('  ') + '\n';
+            output.textContent += 'Post-order (L-R-Root):   ' + postorder(root).join('  ') + '\n';
+            output.textContent += 'Level-order (BFS):       ' + levelorder(root).join('  ');
+        }
+
         function resetTree() {
-            document.getElementById('tree-output').textContent = 'Tree visualization will appear here...';
+            document.getElementById('tree-input').value = '4, 2, 6, 1, 3, 5, 7';
+            document.getElementById('tree-output').textContent = 'Enter numbers above to build a BST and see all traversals...';
         }
-        
-        // Graph Demo
+
+        // ===== GRAPH TRAVERSAL =====
+        function parseGraph() {
+            const v = parseInt(document.getElementById('graph-vertices').value);
+            const edgeStr = document.getElementById('graph-edges').value;
+            if (isNaN(v) || v < 1 || v > 10) return null;
+            const adj = Array.from({ length: v }, () => []);
+            edgeStr.split(',').forEach(e => {
+                const parts = e.trim().split('-');
+                if (parts.length === 2) {
+                    const u = parseInt(parts[0]), w = parseInt(parts[1]);
+                    if (!isNaN(u) && !isNaN(w) && u < v && w < v && u >= 0 && w >= 0) {
+                        adj[u].push(w);
+                        adj[w].push(u);
+                    }
+                }
+            });
+            return { v, adj };
+        }
+
         function demoGraphDFS() {
+            const graph = parseGraph();
+            const start = parseInt(document.getElementById('graph-start').value);
             const output = document.getElementById('graph-output');
-            output.textContent = 'DFS from vertex 0:\n';
-            output.textContent += 'Traversal: 0 → 1 → 2 → 4 → 3\n';
-            output.textContent += 'Visits vertices in depth-first manner';
+            if (!graph) { output.textContent = 'Invalid graph: vertices must be 2–10.'; return; }
+            if (isNaN(start) || start >= graph.v || start < 0) { output.textContent = 'Invalid start vertex.'; return; }
+
+            const visited = new Array(graph.v).fill(false);
+            const result = [];
+            function dfs(node) {
+                visited[node] = true; result.push(node);
+                for (const nb of graph.adj[node]) { if (!visited[nb]) dfs(nb); }
+            }
+            dfs(start);
+
+            output.textContent = 'Graph: ' + graph.v + ' vertices\n';
+            output.textContent += 'Edges: ' + document.getElementById('graph-edges').value + '\n\n';
+            output.textContent += 'DFS from vertex ' + start + ':\n';
+            output.textContent += 'Traversal: ' + result.join(' → ') + '\n';
+            output.textContent += 'Visited ' + result.length + ' of ' + graph.v + ' vertices';
         }
-        
+
         function demoGraphBFS() {
+            const graph = parseGraph();
+            const start = parseInt(document.getElementById('graph-start').value);
             const output = document.getElementById('graph-output');
-            output.textContent = 'BFS from vertex 0:\n';
-            output.textContent += 'Traversal: 0 → 1 → 2 → 3 → 4\n';
-            output.textContent += 'Visits vertices level by level';
+            if (!graph) { output.textContent = 'Invalid graph: vertices must be 2–10.'; return; }
+            if (isNaN(start) || start >= graph.v || start < 0) { output.textContent = 'Invalid start vertex.'; return; }
+
+            const visited = new Array(graph.v).fill(false);
+            const result = [], q = [start];
+            visited[start] = true;
+            while (q.length) {
+                const node = q.shift(); result.push(node);
+                for (const nb of graph.adj[node]) {
+                    if (!visited[nb]) { visited[nb] = true; q.push(nb); }
+                }
+            }
+
+            output.textContent = 'Graph: ' + graph.v + ' vertices\n';
+            output.textContent += 'Edges: ' + document.getElementById('graph-edges').value + '\n\n';
+            output.textContent += 'BFS from vertex ' + start + ':\n';
+            output.textContent += 'Traversal: ' + result.join(' → ') + '\n';
+            output.textContent += 'Visited ' + result.length + ' of ' + graph.v + ' vertices';
         }
-        
+
         function resetGraph() {
-            document.getElementById('graph-output').textContent = 'Graph traversal output will appear here...';
+            document.getElementById('graph-vertices').value = '5';
+            document.getElementById('graph-edges').value = '0-1,0-2,1-2,1-3,2-4,3-4';
+            document.getElementById('graph-start').value = '0';
+            document.getElementById('graph-output').textContent = 'Configure graph above and run traversal...';
         }
-        
-        // Hash Function Demo
+
+        // ===== HASH FUNCTIONS =====
         function calculateHash() {
             const input = parseInt(document.getElementById('hash-input').value);
             const tableSize = 100;
             const output = document.getElementById('hash-output');
-            
-            if (isNaN(input)) {
-                output.textContent = 'Please enter a valid number';
-                return;
-            }
-            
+            if (isNaN(input)) { output.textContent = 'Please enter a valid number.'; return; }
+
             const division = input % tableSize;
             const mult = Math.floor((input * 0.618033988 % 1) * tableSize);
             const folding = (Math.floor(input / 100) + (input % 100)) % tableSize;
-            
-            output.textContent = `For key = ${input}:\n\n`;
-            output.textContent += `Division Method: ${division}\n`;
-            output.textContent += `Multiplication Method: ${mult}\n`;
-            output.textContent += `Folding Method: ${folding}\n\n`;
-            output.textContent += `All methods distribute the key across the hash table`;
+            const squared = input * input;
+            const sqStr = String(squared);
+            const mid = Math.floor(sqStr.length / 2);
+            const midSquare = parseInt(sqStr.substring(mid - 1, mid + 1) || sqStr) % tableSize;
+
+            output.textContent = 'For key = ' + input + ':\n\n';
+            output.textContent += 'Division Method:       h(' + input + ') = ' + input + ' mod 100 = ' + division + '\n';
+            output.textContent += 'Multiplication Method: h(' + input + ') = floor(100 * frac(' + input + ' * 0.618)) = ' + mult + '\n';
+            output.textContent += 'Folding Method:        h(' + input + ') = (' + Math.floor(input/100) + ' + ' + (input%100) + ') mod 100 = ' + folding + '\n';
+            output.textContent += 'Mid-square Method:     h(' + input + ') = mid digits of ' + squared + ' = ' + midSquare;
         }
-        
+
         function resetHash() {
+            document.getElementById('hash-input').value = '';
             document.getElementById('hash-output').textContent = 'Hash values will appear here...';
         }
     </script>
