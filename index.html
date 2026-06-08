@@ -374,20 +374,43 @@ void traverse(Node* head) {
 }
 
 int main() {
-    // Demo function
     printf("=== SINGLY LINKED LIST OPERATIONS ===\n\n");
-    
-    int arr[] = {10, 20, 30, 40};
+
+    int n, val;
     Node* head = NULL;
-    for (int i = 0; i < 4; i++) {
-        head = insertAtEnd(head, arr[i]);
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &val);
+        head = insertAtEnd(head, val);
     }
-    
     printf("Initial List: ");
     traverse(head);
-    
+
+    printf("\nEnter value to insert at beginning: ");
+    scanf("%d", &val);
+    head = insertAtBeginning(head, val);
+    printf("After insert at beginning: ");
+    traverse(head);
+
+    printf("\nEnter value to insert at end: ");
+    scanf("%d", &val);
+    head = insertAtEnd(head, val);
+    printf("After insert at end: ");
+    traverse(head);
+
+    head = deleteFromBeginning(head);
+    printf("After delete from beginning: ");
+    traverse(head);
+
+    head = deleteFromEnd(head);
+    printf("After delete from end: ");
+    traverse(head);
+
     printf("\nPeek: %d\n", peek(head));
-    
+
     return 0;
 }</code></pre>
                     </div>
@@ -550,19 +573,44 @@ void traverseBackward(DNode* head) {
 
 int main() {
     printf("=== DOUBLY LINKED LIST OPERATIONS ===\n\n");
-    
-    int arr[] = {15, 25, 35, 45};
+
+    int n, val;
     DNode* head = NULL;
-    for (int i = 0; i < 4; i++) {
-        head = insertAtEnd(head, arr[i]);
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &val);
+        head = insertAtEnd(head, val);
     }
-    
     printf("Initial List:\n");
     traverseForward(head);
     traverseBackward(head);
-    
+
+    printf("\nEnter value to insert at beginning: ");
+    scanf("%d", &val);
+    head = insertAtBeginning(head, val);
+    printf("After insert at beginning:\n");
+    traverseForward(head);
+
+    printf("\nEnter value to insert at end: ");
+    scanf("%d", &val);
+    head = insertAtEnd(head, val);
+    printf("After insert at end:\n");
+    traverseForward(head);
+
+    head = deleteFromBeginning(head);
+    printf("After delete from beginning:\n");
+    traverseForward(head);
+
+    head = deleteFromEnd(head);
+    printf("After delete from end:\n");
+    traverseForward(head);
+    traverseBackward(head);
+
     printf("\nPeek: %d\n", peek(head));
-    
+
     return 0;
 }</code></pre>
                     </div>
@@ -714,18 +762,38 @@ void traverse(CNode* head) {
 
 int main() {
     printf("=== CIRCULAR LINKED LIST OPERATIONS ===\n\n");
-    
-    int arr[] = {12, 22, 32, 42};
+
+    int n, val;
     CNode* head = NULL;
-    for (int i = 0; i < 4; i++) {
-        head = insertAtEnd(head, arr[i]);
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+    printf("Enter %d elements:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &val);
+        head = insertAtEnd(head, val);
     }
-    
     printf("Initial List: ");
     traverse(head);
-    
+
+    printf("\nEnter value to insert at beginning: ");
+    scanf("%d", &val);
+    head = insertAtBeginning(head, val);
+    printf("After insert at beginning: ");
+    traverse(head);
+
+    printf("\nEnter value to insert at end: ");
+    scanf("%d", &val);
+    head = insertAtEnd(head, val);
+    printf("After insert at end: ");
+    traverse(head);
+
+    head = deleteFromBeginning(head);
+    printf("After delete from beginning: ");
+    traverse(head);
+
     printf("\nPeek: %d\n", peek(head));
-    
+
     return 0;
 }</code></pre>
                     </div>
@@ -868,23 +936,33 @@ int peekADT(StackADT* stack) {
 
 int main() {
     printf("=== STACK OPERATIONS ===\n\n");
-    
+
+    int n, val;
+
     printf("1. STACK USING ARRAY:\n");
     StackArray* sa = createStackArray();
-    pushArray(sa, 10);
-    pushArray(sa, 20);
-    pushArray(sa, 30);
+    printf("Enter number of elements to push: ");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        printf("Enter element %d: ", i + 1);
+        scanf("%d", &val);
+        pushArray(sa, val);
+    }
     printf("Peek: %d\n", peekArray(sa));
     popArray(sa);
-    
+
     printf("\n2. STACK USING ADT:\n");
     StackADT* sadt = createStackADT();
-    pushADT(sadt, 100);
-    pushADT(sadt, 200);
-    pushADT(sadt, 300);
+    printf("Enter number of elements to push: ");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        printf("Enter element %d: ", i + 1);
+        scanf("%d", &val);
+        pushADT(sadt, val);
+    }
     printf("Peek: %d\n", peekADT(sadt));
     popADT(sadt);
-    
+
     return 0;
 }</code></pre>
                     </div>
@@ -1065,23 +1143,33 @@ int peekQueueADT(QueueADT* queue) {
 
 int main() {
     printf("=== QUEUE OPERATIONS ===\n\n");
-    
+
+    int n, val;
+
     printf("1. QUEUE USING ARRAY:\n");
     QueueArray* qa = createQueueArray();
-    enqueueArray(qa, 10);
-    enqueueArray(qa, 20);
-    enqueueArray(qa, 30);
+    printf("Enter number of elements to enqueue: ");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        printf("Enter element %d: ", i + 1);
+        scanf("%d", &val);
+        enqueueArray(qa, val);
+    }
     printf("Front: %d\n", peekQueueArray(qa));
     dequeueArray(qa);
-    
+
     printf("\n2. QUEUE USING ADT:\n");
     QueueADT* qadt = createQueueADT();
-    enqueueADT(qadt, 100);
-    enqueueADT(qadt, 200);
-    enqueueADT(qadt, 300);
+    printf("Enter number of elements to enqueue: ");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        printf("Enter element %d: ", i + 1);
+        scanf("%d", &val);
+        enqueueADT(qadt, val);
+    }
     printf("Front: %d\n", peekQueueADT(qadt));
     dequeueADT(qadt);
-    
+
     return 0;
 }</code></pre>
                     </div>
@@ -1243,32 +1331,40 @@ void printArray(int arr[], int n) {
 
 int main() {
     printf(\"=== SORTING ALGORITHMS ===\\n\\n\");
-    
-    int arr[] = {170, 45, 75, 90, 2, 8, 200, 50};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    
-    printf(\"Original Array: \");
+
+    int n;
+    printf(\"Enter number of elements: \");
+    scanf(\"%d\", &n);
+
+    int arr[n];
+    printf(\"Enter %d elements:\\n\", n);
+    for (int i = 0; i < n; i++) {
+        printf(\"Element %d: \", i + 1);
+        scanf(\"%d\", &arr[i]);
+    }
+
+    printf(\"\\nOriginal Array: \");
     for (int i = 0; i < n; i++) printf(\"%d \", arr[i]);
     printf(\"\\n\\n\");
-    
+
     printf(\"1. RADIX SORT:\\n\");
     int arr1[n];
     for (int i = 0; i < n; i++) arr1[i] = arr[i];
     radixSort(arr1, n);
     printArray(arr1, n);
-    
+
     printf(\"\\n2. HEAP SORT:\\n\");
     int arr2[n];
     for (int i = 0; i < n; i++) arr2[i] = arr[i];
     heapSort(arr2, n);
     printArray(arr2, n);
-    
+
     printf(\"\\n3. QUICK SORT:\\n\");
     int arr3[n];
     for (int i = 0; i < n; i++) arr3[i] = arr[i];
     quickSort(arr3, 0, n - 1);
     printArray(arr3, n);
-    
+
     return 0;
 }</code></pre>
                     </div>
@@ -1473,47 +1569,57 @@ void levelOrderTraversal(TreeNode* root) {
 
 int main() {
     printf("=== TREE TRAVERSAL METHODS ===\\n\\n");
-    
-    //        1
-    //       / \\
-    //      2   3
-    //     / \\ / \\
-    //    4  5 6  7
-    
-    TreeNode* root = createNode(1);
-    root->left = createNode(2);
-    root->right = createNode(3);
-    root->left->left = createNode(4);
-    root->left->right = createNode(5);
-    root->right->left = createNode(6);
-    root->right->right = createNode(7);
-    
-    printf("RECURSIVE TRAVERSALS:\\n");
+
+    int n, val;
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+    printf("Enter %d values (builds a BST):\\n", n);
+
+    TreeNode* root = NULL;
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &val);
+        if (root == NULL) {
+            root = createNode(val);
+        } else {
+            TreeNode* curr = root;
+            while (1) {
+                if (val < curr->data) {
+                    if (curr->left == NULL) { curr->left = createNode(val); break; }
+                    curr = curr->left;
+                } else {
+                    if (curr->right == NULL) { curr->right = createNode(val); break; }
+                    curr = curr->right;
+                }
+            }
+        }
+    }
+
+    printf("\\nRECURSIVE TRAVERSALS:\\n");
     printf("1. In-order: ");
     inorderRecursive(root);
     printf("\\n");
-    
+
     printf("2. Pre-order: ");
     preorderRecursive(root);
     printf("\\n");
-    
+
     printf("3. Post-order: ");
     postorderRecursive(root);
     printf("\\n");
-    
+
     printf("\\nNON-RECURSIVE TRAVERSALS:\\n");
     printf("4. In-order (Iterative): ");
     inorderIterative(root);
     printf("\\n");
-    
+
     printf("5. Pre-order (Iterative): ");
     preorderIterative(root);
     printf("\\n");
-    
+
     printf("\\n6. Level-Order: ");
     levelOrderTraversal(root);
     printf("\\n");
-    
+
     return 0;
 }</code></pre>
                     </div>
@@ -1710,27 +1816,35 @@ void inorderAVL(AVLNode* root) {
 
 int main() {
     printf("=== ADVANCED TREE STRUCTURES ===\\n\\n");
-    
+
+    int n, val;
+
     printf("1. BINARY SEARCH TREE:\\n");
+    printf("Enter number of values: ");
+    scanf("%d", &n);
+    printf("Enter %d values:\\n", n);
     BSTNode* bst = NULL;
-    int bst_arr[] = {50, 30, 70, 20, 40, 60, 80};
-    for (int i = 0; i < 7; i++) {
-        bst = insertBST(bst, bst_arr[i]);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &val);
+        bst = insertBST(bst, val);
     }
     printf("BST In-order: ");
     inorderBST(bst);
     printf("\\n\\n");
-    
+
     printf("2. AVL TREE:\\n");
+    printf("Enter number of values: ");
+    scanf("%d", &n);
+    printf("Enter %d values:\\n", n);
     AVLNode* avl = NULL;
-    int avl_arr[] = {50, 30, 70, 20, 40, 60, 80};
-    for (int i = 0; i < 7; i++) {
-        avl = insertAVL(avl, avl_arr[i]);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &val);
+        avl = insertAVL(avl, val);
     }
     printf("AVL In-order: ");
     inorderAVL(avl);
     printf("\\n");
-    
+
     return 0;
 }</code></pre>
                     </div>
@@ -1894,22 +2008,30 @@ void displayAdjacencyMatrix(Graph* graph) {
 
 int main() {
     printf("=== GRAPH TRAVERSAL METHODS ===\\n\\n");
-    
-    Graph* graph = createGraph(5);
-    addEdge(graph, 0, 1);
-    addEdge(graph, 0, 2);
-    addEdge(graph, 1, 2);
-    addEdge(graph, 1, 3);
-    addEdge(graph, 2, 4);
-    addEdge(graph, 3, 4);
-    
-    printf("Graph has 5 vertices: 0, 1, 2, 3, 4\\n");
+
+    int v, e, u, w, start;
+    printf("Enter number of vertices: ");
+    scanf("%d", &v);
+
+    Graph* graph = createGraph(v);
+
+    printf("Enter number of edges: ");
+    scanf("%d", &e);
+    printf("Enter edges as pairs (u v):\\n");
+    for (int i = 0; i < e; i++) {
+        scanf("%d %d", &u, &w);
+        addEdge(graph, u, w);
+    }
+
     displayAdjacencyMatrix(graph);
-    
+
+    printf("\\nEnter start vertex for traversal: ");
+    scanf("%d", &start);
+
     printf("\\nTRAVERSAL METHODS:\\n");
-    dfs(graph, 0);
-    bfs(graph, 0);
-    
+    dfs(graph, start);
+    bfs(graph, start);
+
     return 0;
 }</code></pre>
                     </div>
@@ -2080,24 +2202,33 @@ int digitExtractionMethod(int key, int tableSize) {
 
 int main() {
     printf(\"=== HASH FUNCTIONS ===\\n\\n\");
-    
-    int keys[] = {23, 45, 56, 12, 34, 78, 90};
-    int n = sizeof(keys) / sizeof(keys[0]);
-    int tableSize = 100;
-    
-    printf(\"Keys: \");
+
+    int n, tableSize;
+    printf(\"Enter table size: \");
+    scanf(\"%d\", &tableSize);
+    printf(\"Enter number of keys: \");
+    scanf(\"%d\", &n);
+
+    int keys[n];
+    printf(\"Enter %d keys:\\n\", n);
+    for (int i = 0; i < n; i++) {
+        printf(\"Key %d: \", i + 1);
+        scanf(\"%d\", &keys[i]);
+    }
+
+    printf(\"\\nKeys: \");
     for (int i = 0; i < n; i++) {
         printf(\"%d \", keys[i]);
     }
     printf(\"\\n\\n\");
-    
+
     printf(\"1. DIVISION METHOD (h(k) = k mod m):\\n\");
     printf(\"Hash values: \");
     for (int i = 0; i < n; i++) {
         printf(\"%d \", divisionMethod(keys[i], tableSize));
     }
     printf(\"\\n\\n\");
-    
+
     printf(\"2. MULTIPLICATION METHOD (h(k) = floor(m * frac(k*A))):\\n\");
     printf(\"A = 0.618033988\\n\");
     printf(\"Hash values: \");
@@ -2105,28 +2236,28 @@ int main() {
         printf(\"%d \", multiplicationMethod(keys[i], tableSize));
     }
     printf(\"\\n\\n\");
-    
+
     printf(\"3. MID-SQUARE METHOD:\\n\");
     printf(\"Hash values: \");
     for (int i = 0; i < n; i++) {
         printf(\"%d \", midSquareMethod(keys[i], tableSize));
     }
     printf(\"\\n\\n\");
-    
+
     printf(\"4. FOLDING METHOD:\\n\");
     printf(\"Hash values: \");
     for (int i = 0; i < n; i++) {
         printf(\"%d \", foldingMethod(keys[i], tableSize));
     }
     printf(\"\\n\\n\");
-    
+
     printf(\"5. DIGIT EXTRACTION METHOD:\\n\");
     printf(\"Hash values: \");
     for (int i = 0; i < n; i++) {
         printf(\"%d \", digitExtractionMethod(keys[i], tableSize));
     }
     printf(\"\\n\");
-    
+
     return 0;
 }</code></pre>
                     </div>
