@@ -1294,76 +1294,102 @@ void heapSort(int arr[], int n) {
     }
 }
 
-// ========== QUICK SORT ==========
-int partition(int arr[], int low, int high) {
-    int pivot = arr[high];
-    int i = low - 1;
-    
-    for (int j = low; j < high; j++) {
-        if (arr[j] < pivot) {
-            i++;
+// ========== SHELL SORT ==========
+void shellSort(int arr[], int n) {
+    for (int gap = n / 2; gap > 0; gap /= 2) {
+        for (int i = gap; i < n; i++) {
             int temp = arr[i];
-            arr[i] = arr[j];
+            int j;
+            for (j = i; j >= gap && arr[j - gap] > temp; j -= gap) {
+                arr[j] = arr[j - gap];
+            }
             arr[j] = temp;
         }
     }
-    int temp = arr[i + 1];
-    arr[i + 1] = arr[high];
-    arr[high] = temp;
-    return i + 1;
 }
 
-void quickSort(int arr[], int low, int high) {
-    if (low < high) {
-        int pi = partition(arr, low, high);
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
+// ========== TREE SORT ==========
+typedef struct TreeNode {
+    int data;
+    struct TreeNode* left;
+    struct TreeNode* right;
+} TreeNode;
+
+TreeNode* createTreeNode(int data) {
+    TreeNode* node = (TreeNode*)malloc(sizeof(TreeNode));
+    node->data = data;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+TreeNode* insertBST(TreeNode* root, int data) {
+    if (root == NULL) return createTreeNode(data);
+    if (data < root->data)
+        root->left = insertBST(root->left, data);
+    else
+        root->right = insertBST(root->right, data);
+    return root;
+}
+
+void inorderTraversal(TreeNode* root, int arr[], int* index) {
+    if (root == NULL) return;
+    inorderTraversal(root->left, arr, index);
+    arr[(*index)++] = root->data;
+    inorderTraversal(root->right, arr, index);
+}
+
+void treeSort(int arr[], int n) {
+    TreeNode* root = NULL;
+    for (int i = 0; i < n; i++) {
+        root = insertBST(root, arr[i]);
     }
+    int index = 0;
+    inorderTraversal(root, arr, &index);
 }
 
 void printArray(int arr[], int n) {
-    printf("Sorted: \");
     for (int i = 0; i < n; i++) {
-        printf("%d \", arr[i]);
+        printf("%d ", arr[i]);
     }
-    printf("\\n\");
+    printf("\\n");
 }
 
 int main() {
-    printf(\"=== SORTING ALGORITHMS ===\\n\\n\");
-
     int n;
-    printf(\"Enter number of elements: \");
-    scanf(\"%d\", &n);
+    printf("=== SORTING ALGORITHMS ===\\n\\n");
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
 
     int arr[n];
-    printf(\"Enter %d elements:\\n\", n);
+    printf("Enter %d elements:\\n", n);
     for (int i = 0; i < n; i++) {
-        printf(\"Element %d: \", i + 1);
-        scanf(\"%d\", &arr[i]);
+        printf("Element %d: ", i + 1);
+        scanf("%d", &arr[i]);
     }
 
-    printf(\"\\nOriginal Array: \");
-    for (int i = 0; i < n; i++) printf(\"%d \", arr[i]);
-    printf(\"\\n\\n\");
+    int arr1[n], arr2[n], arr3[n], arr4[n];
+    for (int i = 0; i < n; i++) {
+        arr1[i] = arr2[i] = arr3[i] = arr4[i] = arr[i];
+    }
 
-    printf(\"1. RADIX SORT:\\n\");
-    int arr1[n];
-    for (int i = 0; i < n; i++) arr1[i] = arr[i];
+    printf("\\nOriginal Array: "); printArray(arr, n);
+
+    printf("\\n1. RADIX SORT:\\n");
     radixSort(arr1, n);
-    printArray(arr1, n);
+    printf("Sorted: "); printArray(arr1, n);
 
-    printf(\"\\n2. HEAP SORT:\\n\");
-    int arr2[n];
-    for (int i = 0; i < n; i++) arr2[i] = arr[i];
+    printf("\\n2. HEAP SORT:\\n");
     heapSort(arr2, n);
-    printArray(arr2, n);
+    printf("Sorted: "); printArray(arr2, n);
 
-    printf(\"\\n3. QUICK SORT:\\n\");
-    int arr3[n];
-    for (int i = 0; i < n; i++) arr3[i] = arr[i];
-    quickSort(arr3, 0, n - 1);
-    printArray(arr3, n);
+    printf("\\n3. SHELL SORT:\\n");
+    shellSort(arr3, n);
+    printf("Sorted: "); printArray(arr3, n);
+
+    printf("\\n4. TREE SORT:\\n");
+    treeSort(arr4, n);
+    printf("Sorted: "); printArray(arr4, n);
 
     return 0;
 }</code></pre>
@@ -1373,16 +1399,27 @@ int main() {
                     <div class="code-label">📤 Output:</div>
                     <div class="output-section">=== SORTING ALGORITHMS ===
 
-Original Array: 170 45 75 90 2 8 200 50 
+Enter number of elements: 8
+Enter 8 elements:
+Element 1: 170
+Element 2: 45
+Element 3: 75
+Element 4: 90
+Element 5: 2
+Element 6: 8
+Element 7: 200
+Element 8: 50
+
+Original Array: 170 45 75 90 2 8 200 50
 
 1. RADIX SORT:
-Sorted: 2 8 45 50 75 90 170 200 
+Sorted: 2 8 45 50 75 90 170 200
 
 2. HEAP SORT:
-Sorted: 2 8 45 50 75 90 170 200 
+Sorted: 2 8 45 50 75 90 170 200
 
 3. SHELL SORT:
-Sorted: 2 8 45 50 75 90 170 200 
+Sorted: 2 8 45 50 75 90 170 200
 
 4. TREE SORT:
 Sorted: 2 8 45 50 75 90 170 200</div>
